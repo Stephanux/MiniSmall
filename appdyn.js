@@ -8,6 +8,9 @@ var session = require('express-session');
 var passport = require("passport");
 var LocalStrategy = require('passport-local').Strategy;
 
+/* Chargement du fichier de configuration générale du Framework MiniSmall */
+global.config = JSON.parse(fs.readFileSync("./config_minismall.json", "utf8"));
+
 /*chargement de la configuration JSON des actions*/
 global.actions_json = JSON.parse(fs.readFileSync("./routes/config_actions.json", "utf8"));
 
@@ -41,7 +44,7 @@ global.db = {};
 var mongoClient = require('mongodb').MongoClient;
 // Connexion URL
 //var url = 'mongodb://greta:azerty@127.0.0.1:27017/gretajs?authMechanism=DEFAULT';
-var url = 'mongodb://127.0.0.1:27017/gretajs';
+var url = config.mongodb.url;
 // Utilisation de la methode “connect” pour se connecter au serveur
 mongoClient.connect(url, { useUnifiedTopology: true }, function (err, client) {
   global.db = client.db('gretajs'); //On met en global la connexion à la base
@@ -51,7 +54,7 @@ mongoClient.connect(url, { useUnifiedTopology: true }, function (err, client) {
 // connexion depuis mongoose
 global.schemas = {};
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/gretajs', { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+mongoose.connect(config.mongoose.url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
   if (err) {
     throw err;
   } else console.log('Connected Mongoose');
@@ -79,9 +82,9 @@ global.pool = mariadb.createPool({
 var Sequelize = require("sequelize");
 
 // configuration des paramètres de la connexion
-global.sequelize = new Sequelize('gretajs', 'admin', 'azerty!', {
-  host: 'localhost',
-  dialect: 'mariadb',
+global.sequelize = new Sequelize(config.sequelize.databaseName, config.sequelize.userName, config.sequelize.password, {
+  host: config.sequelize.host,
+  dialect: config.sequelize.dialect,
   pool: { max: 5, min: 0, idle: 10000 }
 });
 
