@@ -81,7 +81,7 @@ var Sequelize = require("sequelize");
 // configuration des paramètres de la connexion
 global.sequelize = new Sequelize('gretajs', 'admin', 'azerty!', {
   host: 'localhost',
-  dialect: 'mysql',
+  dialect: 'mariadb',
   pool: { max: 5, min: 0, idle: 10000 }
 });
 
