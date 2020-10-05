@@ -79,7 +79,7 @@ global.pool = mariadb.createPool({
 var Sequelize = require("sequelize");
 
 // configuration des paramètres de la connexion
-global.sequelize = new Sequelize('gretajs', 'root', 'vive69!', {
+global.sequelize = new Sequelize('gretajs', 'admin', 'azerty!', {
   host: 'localhost',
   dialect: 'mysql',
   pool: { max: 5, min: 0, idle: 10000 }
