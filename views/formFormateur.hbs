@@ -1,0 +1,34 @@
+<h1> Express App : {{title}}</h1>
+<div class="container">
+    <form method="POST" action="{{form_action}}" id="formAddFormateur">
+        <div class="form-group">
+            Nom : <input type="text" name="nom" value="{{data.nom}}" class="form-control" /><br />
+        </div>
+        <div class="form-group">
+            Prénom : <input type="text" name="prenom" value="{{data.prenom}}" class="form-control" /><br />
+        </div>
+        <div class="form-group">
+            Spécialité : <input type="text" name="specialite" value="{{data.specialite}}" class="form-control" /><br />
+        </div>
+        <div class="form-group">
+            prix/jour : <input type="text" name="prix_jour" value="{{data.prix_jour}}" class="form-control" /><br />
+        </div>
+        <hr>
+        <input type="submit" value="Confirmer la {{libelle}}" class="button" />
+        <input type="button" value="Supprimer {{del_label}}" id="delbtn" class="button">
+    </form>
+</div>
+
+{{!-- Script de validation du formulaire de modification --}}
+<script>
+    var form = document.getElementById('formAddFormateur');
+    form.addEventListener('submit', function (evt) {
+        var actionPost = "/" + form.action.split('/')[3];
+        if (actionPost == "/modifyFormateur") form.action += "/{{data._id}}";
+        form.submit();
+    });
+    var btn_del = document.getElementById('delbtn');
+    btn_del.addEventListener('click', function (evt) {
+        window.location = "/deleteFormateur/{{data._id}}";
+    });
+</script>

@@ -1,0 +1,10 @@
+<h3>Liste des pays (source mongodb) : </h3>
+<select id="countries">
+    {{#each data}}
+        {{#compare this.code 'FR' operator='=='}}
+            <option value="{{this.code}}" selected>{{this.name}}</option>
+        {{else}}
+            <option value="{{this.code}}">{{this.name}}</option>
+        {{/compare}}
+    {{/each}}
+</select>

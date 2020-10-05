@@ -1,0 +1,74 @@
+<h1> Express App : {{title}}</h1>
+<div class="container">
+    <form method="POST" action="{{form_action}}" id="formAddUser">
+        <div class="form-group">
+            name : <input type="text" name="name" value="{{data.name}}" class="form-control" /><br />
+        </div>
+        <div class="form-group">
+            firstName : <input type="text" name="firstName" value="{{data.firstName}}" class="form-control" /><br />
+        </div>
+        <div class="form-group">
+            login : <input type="text" name="login" value="{{data.login}}" class="form-control" /><br />
+        </div>
+        <div class="form-group">
+            mdp : <input type="password" name="mdp" value="{{data.mdp}}" class="form-control" /><br />
+        </div>
+        <div class="form-group">
+            function : <input type="text" name="function" value="{{data.function}}" class="form-control" /><br />
+        </div>
+        <div class="form-group">
+            office : <input type="text" name="office" value="{{data.office}}" class="form-control" /><br />
+            <div class="form-group">
+                date_naiss : <input type="text" name="date_naiss" value="{{data.date_naiss}}"
+                    class="form-control" /><br />
+            </div>
+            <div class="form-group">
+                adresse1 : <input type="text" name="adresse1" value="{{data.adresse1}}" class="form-control" /><br />
+            </div>
+            <div class="form-group">
+                adresse2 : <input type="text" name="adresse2" value="{{data.adresse2}}" class="form-control" /><br />
+            </div>
+            <div class="form-group">
+                cp : <input type="text" name="cp" value="{{data.cp}}" class="form-control" /><br />
+            </div>
+            <div class="form-group">
+                city : <input type="text" name="city" value="{{data.city}}" class="form-control" /><br />
+            </div>
+            <div class="form-group">
+                country : <select id="country" name="country">
+                    {{#each liste}}
+                    {{#compare ../data.country this.id operator='=='}}
+                        <option value="{{this._id}}" selected>{{this.name}} - {{this.code}}</option>
+                    {{else}}
+                         <option value={{this._id}}>{{this.name}} - {{this.code}}</option>
+                    {{/compare}}
+                    {{/each}}
+                </select>
+            </div>
+            <div class="form-group">
+                mobile_phone : <input type="text" name="mobile_phone" value="{{data.mobile_phone}}"
+                    class="form-control" /><br />
+            </div>
+            <div class="form-group">
+                home_phone : <input type="text" name="home_phone" value="{{data.home_phone}}"
+                    class="form-control" /><br />
+            </div>
+            <hr>
+            <input type="submit" value="Confirmer la {{libelle}}" class="button" />
+            <input type="button" value="Supprimer cet utilisateur" id="delbtn" class="button">
+    </form>
+</div>
+
+{{!-- Script de validation du formulaire de modification --}}
+<script>
+    var form = document.getElementById('formAddUser');
+    form.addEventListener('submit', function (evt) {
+        var actionPost = "/" + form.action.split('/')[3];
+        if (actionPost == "/modifyUser") form.action += "/{{data._id}}";
+        form.submit();
+    });
+    var btn_del = document.getElementById('delbtn');
+    btn_del.addEventListener('click', function (evt) {
+        window.location = "/deleteUser/{{data._id}}";
+    });
+</script>

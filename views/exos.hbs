@@ -1,0 +1,7 @@
+<h1>{{ stitle}}</h1>
+<h2>Express App : {{title}}</h2><br>
+<select name="exos">
+    {{#each data}}
+    <option value="{{this._id}}">{{this.libelle}}</option>
+    {{/each}}
+</select>
