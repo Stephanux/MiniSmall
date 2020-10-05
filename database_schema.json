@@ -1,0 +1,64 @@
+{
+	"Countries" : {
+		"collection" : "countries",
+		"schema": {
+        	"_id": "ObjectId",
+	    	"code": "String",
+	    	"name": "String"
+    	}
+    },
+    "Exercices" : {
+        "collection": "exercices",
+        "schema": {
+            "_id": "ObjectId",
+	        "libelle": "String"
+        }
+    },
+    "Users": {
+        "collection": "users",
+        "schema": {
+            "_id": "ObjectId",
+            "name": "String",
+            "firstName": "String",
+            "login": "String",
+            "mdp": "String",
+            "function": "String",
+            "office": "String",
+            "date_naiss": "String",
+            "adresse1": "String",
+            "adresse2": "String",
+            "cp": "String",
+            "city": "String",
+            "country": {
+                "type": "ObjectId",
+                "ref": "Countries"
+            },
+            "mobile_phone": "String",
+            "home_phone": "String"
+        }
+    },
+    "Formations": {
+        "collection": "formations",
+        "schema": {
+            "_id": "ObjectId",
+            "libelle": "String",
+            "duree": "String",
+            "plan_cours": "String",
+            "prix": "Number",
+            "formateur": {
+                "type": "ObjectId",
+                "ref": "Formateurs"
+            }
+        }
+    },
+    "Formateurs" : {
+        "collection": "formateurs",
+        "schema": {
+            "_id": "ObjectId",
+            "nom": "String",
+            "prenom": "String",
+            "specialite": "String",
+            "prix_jour": "Number"
+        }
+    }
+}

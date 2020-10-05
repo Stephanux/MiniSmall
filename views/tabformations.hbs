@@ -1,0 +1,26 @@
+<table>
+<thead>
+   <tr>
+     <th>Libellé</th>
+     <th>Durée</th>
+     <th>Plan Cours</th>
+     <th>Prix</th>
+     <th>Nom formateur</th>
+     <th>Prénom formateur</th>
+     <th>Prix/jour formateur</th>
+   </tr>
+</thead>
+<tbody>
+{{#each data}}
+   <tr>
+     <td>{{this.libelle}}</td>
+     <td>{{this.duree}}</td>
+     <td>{{this.plan_cours}}</td>
+     <td>{{this.prix}}</td>
+     <td>{{this.formateur.nom}}</td>
+     <td>{{this.formateur.prenom}}</td>
+     <td>{{this.formateur.prix_jour}}</td>
+   </tr>
+{{/each}}
+</tbody>
+</table>

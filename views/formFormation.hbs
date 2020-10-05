@@ -1,0 +1,58 @@
+<h1> Express App : {{title}}</h1>
+<div class="container">
+    <form method="POST" action="{{form_action}}" id="formAddFormation">
+        <div class="form-group">
+            Libelle : ........... <input type="text" name="libelle" value="{{data.libelle}}" class="form-control" /><br />
+        </div><br>
+        <div class="form-group">
+            Durée : ............ <input type="text" name="duree" value="{{data.duree}}" class="form-control" /><br />
+        </div><br>
+        <div class="form-group">
+            Plan de cours : <input type="text" name="plan_cours" value="{{data.plan_cours}}" class="form-control" /><br />
+        </div><br>
+        <div class="form-group">
+            Prix : ............... <input type="text" name="prix" value="{{data.prix}}" class="form-control" /><br />
+        </div><br>
+        <div class="form-group">
+            Formateur : .... <select id="formateur" name="formateur">
+                {{#each liste.Formateurs}}
+                    {{#compare ../data.formateur this.id operator='=='}}
+                        <option value="{{this._id}}" selected>{{this.nom}} - {{this.prenom}}</option>
+                    {{else}}
+                        <option value={{this._id}}>{{this.nom}} - {{this.prenom}}</option>
+                    {{/compare}}
+                {{/each}}
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            Pays : ............. <select id="countries" name="country">
+                {{#each liste.Countries}}
+                    {{#compare ../data.country this.id operator='=='}}
+                        <option value="{{this._id}}" selected>{{this.name}} - {{this.code}}</option>
+                    {{else}}
+                        <option value={{this._id}}>{{this.name}} - {{this.code}}</option>
+                    {{/compare}}
+                {{/each}}
+            </select>
+        </div><br/>
+        <hr>
+        <input type="submit" value="Confirmer la {{libelle}}" class="button" />
+        <input type="button" value="Supprimer {{del_label}}" id="delbtn" class="button">
+    </form>
+</div>
+
+{{!-- Script de validation du formulaire de modification --}}
+<script>
+    var list_formateurs = {{liste}};
+    var form = document.getElementById('formAddFormation');
+    form.addEventListener('submit', function (evt) {
+        var actionPost = "/" + form.action.split('/')[3];
+        if (actionPost == "/modifyFormation") form.action += "/{{data._id}}";
+        form.submit();
+    });
+    var btn_del = document.getElementById('delbtn');
+    btn_del.addEventListener('click', function (evt) {
+        window.location = "/deleteFormation/{{data._id}}";
+    });
+</script>
