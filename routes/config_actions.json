@@ -136,8 +136,8 @@
         "del_label": "ce Formateur"
     },
     "GET/newFormateur": {
-        "controler": "finder",
-        "modelName": "Formateurs",
+        "controler": "findListSchemas",
+        "modelList": ["Countries"],
         "view" : "formFormateur",
         "form_action": "/createFormateur",
         "title": "Create a new Formateur",
@@ -162,5 +162,24 @@
         "controler": "selectSQL",
         "sql_query": "SELECT * FROM countries",
         "view": "countries"
+    },
+    "GET/selectFormateursSQL": {
+        "controler": "selectSQL",
+        "sql_query": "SELECT * FROM formateurs",
+        "view": "liste_formateurs"
+    },
+    "GET/newFormateurSQL" : {
+        "controler": "getView",
+        "view": "formFormateur",
+        "form_action": "/createFormateurSQL",
+        "title": "Create a new Formateur",
+        "libelle": "Création"
+    },
+    "POST/createFormateurSQL": {
+        "controler": "insertSQL",
+        "sql_query": "INSERT INTO formateurs (nom, prenom, specialite, prix_jour) VALUES (?,?,?,?)",
+        "params_query": ["nom", "prenom", "specialite", "prix_jour"],
+        "view": "liste_formateurs",
+        "redirect": "/selectFormateursSQL"
     }
 }

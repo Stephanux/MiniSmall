@@ -49,6 +49,10 @@ function manageAction(req, res, next) {
     if (global.actions_json[req.message.action].sql_query != null) {
         req.message.sql_query = global.actions_json[req.message.action].sql_query;
     }
+    // On défini ici les paramètres pour une requête SQL INSERT qui sera construite dans le contrôleur insertSQL */
+    if (global.actions_json[req.message.action].params_query != null) {
+        req.message.params_query = global.actions_json[req.message.action].params_query;
+    }
     // On défini ici la chaîne de caratères title pour un affichage dan la vue
     if (global.actions_json[req.message.action].title != null) {
         req.message.title = global.actions_json[req.message.action].title;
@@ -64,6 +68,10 @@ function manageAction(req, res, next) {
     // On défini ici le label du  bouton delete du formulaire
     if (global.actions_json[req.message.action].del_label != null) {
         req.message.del_label = global.actions_json[req.message.action].del_label;
+    }
+    // On définit ici l'action vers laquelle on veut rediriger l'affichage
+    if (global.actions_json[req.message.action].redirect != null) {
+        req.message.redirect = global.actions_json[req.message.action].redirect;
     }
     // (...) Il est possible ici d'ajouter des variables à l'annuaire config_actions.json 
     // en fonction des besoins du développeur
