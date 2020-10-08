@@ -22,13 +22,15 @@
 {{!-- Script de validation du formulaire de modification --}}
 <script>
     var form = document.getElementById('formAddFormateur');
+    var actionPost = "/" + form.action.split('/')[3];
     form.addEventListener('submit', function (evt) {
-        var actionPost = "/" + form.action.split('/')[3];
         if (actionPost == "/modifyFormateur") form.action += "/{{data._id}}";
+        else if (actionPost == "/modifyFormateurSQL") form.action += "/{{data.id}}";
         form.submit();
     });
     var btn_del = document.getElementById('delbtn');
     btn_del.addEventListener('click', function (evt) {
-        window.location = "/deleteFormateur/{{data._id}}";
+       if (actionPost == "/modifyFormateur") window.location = "/deleteFormateur/{{data._id}}";
+       else if (actionPost == "/modifyFormateurSQL") window.location = "/deleteFormateurSQL/{{data.id}}";
     });
 </script>

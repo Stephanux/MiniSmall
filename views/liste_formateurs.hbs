@@ -2,12 +2,16 @@
 <br>
 <select name="formateurs" id="formateur">
     {{#compare data null operator="=="}}
-    <option value="rien">Il n'y a pas de données dans la base formation</option>
+        <option value="rien">Il n'y a pas de données dans la base formation</option>
     {{else}}
-    <option value="0">Select a formateur to modify his datas</option>
-    {{#each data}}
-    <option value="{{this._id}}">{{this.nom}}-{{this.prenom}}-{{this.specialite}}</option>
-    {{/each}}
+        <option value="0">Select a formateur to modify his datas</option>
+        {{#each data}}
+            {{#if this._id}}
+                <option value="{{this._id}}">{{this.nom}}-{{this.prenom}}-{{this.specialite}}</option>
+            {{else}}
+                <option value="{{this.id}}">{{this.nom}}-{{this.prenom}}-{{this.specialite}}</option>
+            {{/if}}
+        {{/each}}
     {{/compare}}
 </select>
 <h2>or</h2><br />
@@ -15,10 +19,18 @@
 <script>
     var usr = document.getElementById('formateur');
     usr.addEventListener('change', function (evt) {
-        window.location = "/formFormateur/" + usr.value;
+        if (window.location.pathname == "/selectFormateursSQL") {
+            window.location = "/formFormateurSQL/" + usr.value;
+        } else {
+            window.location = "/formFormateur/" + usr.value;
+        }
     });
     var btn_new = document.getElementById('newFormateur');
     btn_new.addEventListener('click', function (evt) {
-        window.location = "/newFormateur";
+        if (window.location.pathname == "/selectFormateursSQL") {
+            window.location = "/newFormateurSQL";
+        } else {
+            window.location = "/newFormateur";
+        }
     });
 </script>

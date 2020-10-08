@@ -181,5 +181,25 @@
         "params_query": ["nom", "prenom", "specialite", "prix_jour"],
         "view": "liste_formateurs",
         "redirect": "/selectFormateursSQL"
+    },
+    "GET/formFormateurSQL": {
+        "controler": "selectSQL",
+        "view": "formFormateur",
+        "sql_query": "SELECT * FROM formateurs WHERE id=?",
+        "form_action": "/modifyFormateurSQL",
+        "title":"Modification formateur",
+        "libelle": "Modification",
+        "del_label": "ce Formateur"
+    },
+    "POST/modifyFormateurSQL": {
+        "controler": "updateSQL",
+        "sql_query": "UPDATE formateurs SET nom=?, prenom=?, specialite=?, prix_jour=? WHERE id=?",
+        "params_query": ["nom", "prenom", "specialite", "prix_jour"],
+        "redirect": "/selectFormateursSQL"
+    },
+    "GET/deleteFormateurSQL": {
+        "controler": "deleteSQL",
+        "sql_query": "DELETE FROM formateurs WHERE id=?",
+        "redirect": "/selectFormateursSQL"
     }
 }
