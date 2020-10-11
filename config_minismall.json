@@ -1,4 +1,7 @@
 {
+    "server": {
+        "port": 3040
+    },
     "sequelize" : {
         "dialect": "mariadb",
         "host": "localhost",
