@@ -1,0 +1,16 @@
+[
+    "controler",
+    "auth",
+    "modelName",
+    "view",
+    "return_type",
+    "pop_ref",
+    "modelList",
+    "sql_query",
+    "params_query",
+    "title",
+    "form_action",
+    "libelle",
+    "del_label",
+    "redirect"
+]
