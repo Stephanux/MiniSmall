@@ -23,7 +23,7 @@
     "GET/exos": {
         "controler": "finder",
         "modelName": "Exercices",
-        "view": "exos"    
+        "view": "exos"
     },
     "GET/exosJSON": {
         "controler": "finder",
@@ -58,7 +58,7 @@
         "controler": "finder",
         "modelName": "Users",
         "modelList": "Countries",
-        "view" : "formUser",
+        "view": "formUser",
         "form_action": "/createUser",
         "title": "Create a new user",
         "libelle": "creation"
@@ -71,7 +71,7 @@
     "GET/deleteUser": {
         "controler": "deleteById",
         "modelName": "Users",
-        "view" : "users"
+        "view": "users"
     },
     "GET/formations": {
         "controler": "populate",
@@ -87,20 +87,20 @@
         "title": "Liste des formations",
         "pop_ref": "formateur"
     },
-    "GET/formFormation" :{
+    "GET/formFormation": {
         "controler": "findOneAndListSchemas",
         "modelName": "Formations",
         "modelList": ["Formateurs", "Countries"],
         "view": "formFormation",
         "form_action": "/modifyFormation",
-        "title":"Modification formation",
+        "title": "Modification formation",
         "libelle": "Modification",
         "del_label": "cette Formation"
     },
     "GET/newFormation": {
         "controler": "findListSchemas",
         "modelList": ["Formateurs", "Countries"],
-        "view" : "formFormation",
+        "view": "formFormation",
         "form_action": "/createFormation",
         "title": "Create a new Formation",
         "libelle": "Création"
@@ -118,7 +118,7 @@
     "GET/deleteFormation": {
         "controler": "deleteById",
         "modelName": "Formations",
-        "view" : "liste_formations"
+        "view": "liste_formations"
     },
     "GET/formateurs": {
         "controler": "finder",
@@ -126,19 +126,19 @@
         "view": "liste_formateurs",
         "title": "Liste des formateurs"
     },
-    "GET/formFormateur" :{
+    "GET/formFormateur": {
         "controler": "findById",
         "modelName": "Formateurs",
         "view": "formFormateur",
         "form_action": "/modifyFormateur",
-        "title":"Modification formateur",
+        "title": "Modification formateur",
         "libelle": "Modification",
         "del_label": "ce Formateur"
     },
     "GET/newFormateur": {
         "controler": "findListSchemas",
         "modelList": ["Countries"],
-        "view" : "formFormateur",
+        "view": "formFormateur",
         "form_action": "/createFormateur",
         "title": "Create a new Formateur",
         "libelle": "Création"
@@ -156,7 +156,7 @@
     "GET/deleteFormateur": {
         "controler": "deleteById",
         "modelName": "Formateurs",
-        "view" : "liste_formateurs"
+        "view": "liste_formateurs"
     },
     "GET/selectSQL": {
         "controler": "selectSQL",
@@ -168,7 +168,7 @@
         "sql_query": "SELECT * FROM formateurs",
         "view": "liste_formateurs"
     },
-    "GET/newFormateurSQL" : {
+    "GET/newFormateurSQL": {
         "controler": "getView",
         "view": "formFormateur",
         "form_action": "/createFormateurSQL",
@@ -187,7 +187,7 @@
         "view": "formFormateur",
         "sql_query": "SELECT * FROM formateurs WHERE id=?",
         "form_action": "/modifyFormateurSQL",
-        "title":"Modification formateur",
+        "title": "Modification formateur",
         "libelle": "Modification",
         "del_label": "ce Formateur"
     },
@@ -201,5 +201,19 @@
         "controler": "deleteSQL",
         "sql_query": "DELETE FROM formateurs WHERE id=?",
         "redirect": "/selectFormateursSQL"
+    },
+    "POST/addPiece": {
+        "controler": "addSQLAndMultiUpload",
+        "view": "addPiece",
+        "request": "insert into pieces_detachees (nom_p_d, longueur, largeur, diametre, localisation, id_type_p_d, photo, doc_pdf) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        "title": "Ajoutez une pièce détachée",
+        "redirect": "/formInsertPiece",
+        "fieldUpload": [{
+            "name": "photo",
+            "maxCount": 1
+        }, {
+            "name": "docPD",
+            "maxCount": 1
+        }]
     }
 }
