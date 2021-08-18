@@ -37,11 +37,11 @@
             <div class="form-group">
                 country : <select id="country" name="country">
                     {{#each liste}}
-                    {{#compare ../data.country this.id operator='=='}}
-                        <option value="{{this._id}}" selected>{{this.name}} - {{this.code}}</option>
-                    {{else}}
-                         <option value={{this._id}}>{{this.name}} - {{this.code}}</option>
-                    {{/compare}}
+                        {{#compare ../data.country this.id operator='=='}}
+                            <option value="{{this._id}}" selected>{{this.name}} - {{this.code}}</option>
+                        {{else}}
+                            <option value={{this._id}}>{{this.name}} - {{this.code}}</option>
+                        {{/compare}}
                     {{/each}}
                 </select>
             </div>

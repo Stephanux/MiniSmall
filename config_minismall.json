@@ -2,7 +2,7 @@
     "server": {
         "port": 3040
     },
-    "sequelize" : {
+    "sequelize": {
         "dialect": "mariadb",
         "host": "localhost",
         "port": "3306",
@@ -10,10 +10,10 @@
         "userName": "admin",
         "password": "azerty!"
     },
-    "mongodb" : {
-        "url": "mongodb://127.0.0.1:27017/gretajs"
+    "mongodb": {
+        "url": "mongodb://127.0.0.1:27017/minismall"
     },
     "mongoose": {
-        "url":"mongodb://127.0.0.1:27017/gretajs"
+        "url": "mongodb://127.0.0.1:27017/minismall"
     }
 }
