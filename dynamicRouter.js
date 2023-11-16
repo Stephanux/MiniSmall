@@ -17,7 +17,7 @@ function dynamicRouter(app) {
 vers le bon contrôleur en fonction de l'action du pathname  */
 function manageAction(req, res, next) {
     req.message = {};
-    var path = req.originalUrl; // Le pathname après le port 3000 dans l'URL.
+    var path = req.originalUrl; // Le pathname après le port 3040 dans l'URL.
     if (path.includes("?")) {
         path = path.split('?')[0];
         if (path.split('/').length > 0) path = '/' + path.split('/')[1]

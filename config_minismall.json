@@ -6,14 +6,14 @@
         "dialect": "mariadb",
         "host": "localhost",
         "port": "3306",
-        "databaseName": "gretajs",
+        "databaseName": "greta",
         "userName": "admin",
-        "password": "azerty!"
+        "password": "azerty"
     },
     "mongodb": {
-        "url": "mongodb://127.0.0.1:27017/minismall"
+        "url": "mongodb://127.0.0.1:27017/r504"
     },
     "mongoose": {
-        "url": "mongodb://127.0.0.1:27017/minismall"
+        "url": "mongodb://127.0.0.1:27017/r504"
     }
 }

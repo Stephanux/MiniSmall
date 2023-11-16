@@ -2,9 +2,9 @@
 <select id="countries">
     {{#each data}}
         {{#compare this.code 'FR' operator='=='}}
-            <option value="{{this.code}}" selected>{{this.name}}</option>
+            <option value="{{this.code}}" selected>{{this.name_fr}}</option>
         {{else}}
-            <option value="{{this.code}}">{{this.name}}</option>
+            <option value="{{this.code}}">{{this.name_fr}}</option>
         {{/compare}}
     {{/each}}
 </select>
