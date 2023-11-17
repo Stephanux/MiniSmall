@@ -90,7 +90,10 @@
     "GET/formFormation": {
         "controler": "nosql/findOneAndListSchemas",
         "modelName": "Formations",
-        "modelList": ["Formateurs", "Countries"],
+        "modelList": [
+            "Formateurs",
+            "Countries"
+        ],
         "view": "formFormation",
         "form_action": "/modifyFormation",
         "title": "Modification formation",
@@ -99,7 +102,10 @@
     },
     "GET/newFormation": {
         "controler": "nosql/findListSchemas",
-        "modelList": ["Formateurs", "Countries"],
+        "modelList": [
+            "Formateurs",
+            "Countries"
+        ],
         "view": "formFormation",
         "form_action": "/createFormation",
         "title": "Create a new Formation",
@@ -137,7 +143,9 @@
     },
     "GET/newFormateur": {
         "controler": "nosql/findListSchemas",
-        "modelList": ["Countries"],
+        "modelList": [
+            "Countries"
+        ],
         "view": "formFormateur",
         "form_action": "/createFormateur",
         "title": "Create a new Formateur",
@@ -178,7 +186,12 @@
     "POST/createFormateurSQL": {
         "controler": "sql/insertSQL",
         "sql_query": "INSERT INTO formateurs (nom, prenom, specialite, prix_jour) VALUES (?,?,?,?)",
-        "params_query": ["nom", "prenom", "specialite", "prix_jour"],
+        "params_query": [
+            "nom",
+            "prenom",
+            "specialite",
+            "prix_jour"
+        ],
         "view": "liste_formateurs",
         "redirect": "/selectFormateursSQL"
     },
@@ -194,7 +207,12 @@
     "POST/modifyFormateurSQL": {
         "controler": "sql/updateSQL",
         "sql_query": "UPDATE formateurs SET nom=?, prenom=?, specialite=?, prix_jour=? WHERE id=?",
-        "params_query": ["nom", "prenom", "specialite", "prix_jour"],
+        "params_query": [
+            "nom",
+            "prenom",
+            "specialite",
+            "prix_jour"
+        ],
         "redirect": "/selectFormateursSQL"
     },
     "GET/deleteFormateurSQL": {
@@ -208,12 +226,15 @@
         "request": "insert into pieces_detachees (nom_p_d, longueur, largeur, diametre, localisation, id_type_p_d, photo, doc_pdf) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         "title": "Ajoutez une pièce détachée",
         "redirect": "/formInsertPiece",
-        "fieldUpload": [{
-            "name": "photo",
-            "maxCount": 1
-        }, {
-            "name": "docPD",
-            "maxCount": 1
-        }]
+        "fieldUpload": [
+            {
+                "name": "photo",
+                "maxCount": 1
+            },
+            {
+                "name": "docPD",
+                "maxCount": 1
+            }
+        ]
     }
 }
