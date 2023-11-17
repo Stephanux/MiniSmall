@@ -25,12 +25,12 @@
     var actionPost = "/" + form.action.split('/')[3];
     form.addEventListener('submit', function (evt) {
         if (actionPost == "/modifyFormateur") form.action += "/{{data._id}}";
-        else if (actionPost == "/modifyFormateurSQL") form.action += "/{{data.id}}";
+        else if (actionPost == "/modifyFormateurSQL") form.action += "/{{data.id_formateur}}";
         form.submit();
     });
     var btn_del = document.getElementById('delbtn');
     btn_del.addEventListener('click', function (evt) {
        if (actionPost == "/modifyFormateur") window.location = "/deleteFormateur/{{data._id}}";
-       else if (actionPost == "/modifyFormateurSQL") window.location = "/deleteFormateurSQL/{{data.id}}";
+       else if (actionPost == "/modifyFormateurSQL") window.location = "/deleteFormateurSQL/{{data.id_formateur}}";
     });
 </script>
