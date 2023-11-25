@@ -47,40 +47,41 @@ hbs.registerHelper('compare', function(lvalue, rvalue, options) {
         return options.inverse(this);
     }
 });
-
-global.db = {};
-var mongoClient = require('mongodb').MongoClient;
-// Connexion URL
-//var url = 'mongodb://greta:azerty@127.0.0.1:27017/gretajs?authMechanism=DEFAULT';
-var url = config.mongodb.url;
-// Utilisation de la methode “connect” pour se connecter au serveur
-mongoClient.connect(url, {
-    useUnifiedTopology: true
-}, function(err, client) {
-    global.db = client.db('gretajs'); //On met en global la connexion à la base
-    console.log("Connected successfully to server: global.db initialized");
-});
-
-// connexion depuis mongoose
-global.schemas = {};
-var mongoose = require('mongoose');
-mongoose.connect(config.mongoose.url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}, function(err) {
-    if (err) {
-        throw err;
-    } else console.log('Connected Mongoose');
-});
-
-// chargement des schémas depuis le fichier de configuration JSON dans une variable
-var database_schemas = JSON.parse(fs.readFileSync("database_schema.json", 'utf8'));
-// Initialisation de chaque schéma par association entre le schéma et la collection
-for (modelName in database_schemas) {
-    global.schemas[modelName] = mongoose.model(modelName, database_schemas[modelName].schema,
-        database_schemas[modelName].collection);
+if (global.config.mongodb.used == "True") {
+    global.db = {};
+    var mongoClient = require('mongodb').MongoClient;
+    // Connexion URL
+    //var url = 'mongodb://greta:azerty@127.0.0.1:27017/gretajs?authMechanism=DEFAULT';
+    var url = config.mongodb.url;
+    // Utilisation de la methode “connect” pour se connecter au serveur
+    mongoClient.connect(url, {
+        useUnifiedTopology: true
+    }, function(err, client) {
+        global.db = client.db('gretajs'); //On met en global la connexion à la base
+        console.log("Connected successfully to server: global.db initialized");
+    });
 }
+if (global.config.mongoose.used == "True") {
+    // connexion depuis mongoose
+    global.schemas = {};
+    var mongoose = require('mongoose');
+    mongoose.connect(config.mongoose.url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }, function(err) {
+        if (err) {
+            throw err;
+        } else console.log('Connected Mongoose');
+    });
 
+    // chargement des schémas depuis le fichier de configuration JSON dans une variable
+    var database_schemas = JSON.parse(fs.readFileSync("database_schema.json", 'utf8'));
+    // Initialisation de chaque schéma par association entre le schéma et la collection
+    for (modelName in database_schemas) {
+        global.schemas[modelName] = mongoose.model(modelName, database_schemas[modelName].schema,
+            database_schemas[modelName].collection);
+    }
+}
 //connexion via mariadb avec driver natif avec la variable pool en global
 /*var mariadb = require('mariadb');
 global.pool = mariadb.createPool({
@@ -91,19 +92,27 @@ global.pool = mariadb.createPool({
     connectionLimit: 5
 });*/
 
-// connexion à mariadb via Sequelize
-var Sequelize = require("sequelize");
+if (global.config.sequelize.used == "True") {
+    // connexion à mariadb via Sequelize
+    var Sequelize = require("sequelize");
 
-// configuration des paramètres de la connexion
-global.sequelize = new Sequelize(config.sequelize.databaseName, config.sequelize.userName, config.sequelize.password, {
-    host: config.sequelize.host,
-    dialect: config.sequelize.dialect,
-    pool: {
-        max: 5,
-        min: 0,
-        idle: 10000
-    }
-});
+    // configuration des paramètres de la connexion
+    global.sequelize = new Sequelize(config.sequelize.databaseName, config.sequelize.userName, config.sequelize.password, {
+        host: config.sequelize.host,
+        dialect: config.sequelize.dialect,
+        pool: {
+            max: 5,
+            min: 0,
+            idle: 10000
+        }
+    });
+}
+try {
+    sequelize.authenticate();
+    console.log('Sequelize : Connection has been established successfully.');
+} catch (error) {
+    console.error('Sequelize: Unable to connect to the database:', error);
+}
 
 var app = express();
 

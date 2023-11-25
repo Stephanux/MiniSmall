@@ -219,5 +219,19 @@
         "controler": "sql/deleteSQLById",
         "sql_query": "DELETE FROM formateurs WHERE id_formateur=?",
         "redirect": "/selectFormateursSQL"
+    },
+    "POST/addFile": {
+        "controler": "addSQLAndMultiUpload",
+        "view": "addPiece",
+        "request": "insert into pieces_detachees (nom_p_d, longueur, largeur, diametre, localisation, id_type_p_d, photo, doc_pdf) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        "title": "Ajoutez une pièce détachée",
+        "redirect": "/formInsertPiece",
+        "fieldUpload": [{
+            "name": "photo",
+            "maxCount": 1
+        }, {
+            "name": "doc",
+            "maxCount": 1
+        }]
     }
 }
