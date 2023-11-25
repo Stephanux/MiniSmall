@@ -139,17 +139,26 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    done(null, user.id_users);
 });
 
 passport.deserializeUser(function(id, done) {
-    global.schemas["Users"].findById(id, function(err, user) {
-        done(err, user);
+    var params_value = [];
+    params_value.push(id);
+    global.sequelize.query("SELECT * FROM users WHERE id_users=?", {
+        replacements: params_value,
+        type: sequelize.QueryTypes.SELECT
+    }).then(function(result) { // sql query success
+        console.log('deserialize user data : ', result);
+        done(null, result);
+    }).catch(function(err) { // sql query error
+        console.log('error select', err);
     });
+
 });
 
 passport.use(new LocalStrategy(
-    function(username, password, done) {
+    /*function(username, password, done) {
         global.schemas["Users"].findOne({
             login: username
         }, function(err, user) {
@@ -171,6 +180,34 @@ passport.use(new LocalStrategy(
             console.log("utilisateur : ", user);
             return done(null, user);
         });
+    }*/
+    function(username, password, done) {
+        var params_value = [];
+        params_value.push(username);
+        params_value.push(password);
+        // ici on réalise une requête
+        global.sequelize.query("SELECT id_users, login, mdp FROM users WHERE login=?", {
+                replacements: params_value,
+                type: sequelize.QueryTypes.SELECT
+            })
+            .then(function(result) { // sql query success
+                if (!result[0]) {
+                    console.log("pas d'utilisateur trouvé");
+                    return done(null, false, {
+                        message: 'Incorrect username.'
+                    });
+                }
+                if (result[0].mdp != password) {
+                    console.log("password erroné");
+                    return done(null, false, {
+                        message: 'Incorrect password.'
+                    });
+                }
+                console.log("utilisateur : ", result[0]);
+                return done(null, result[0]);
+            }).catch(function(err) { // sql query error
+                console.log('error select', err);
+            });
     }
 ));
 

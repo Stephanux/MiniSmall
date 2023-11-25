@@ -15,156 +15,87 @@
         "title": "Bienvenue dans le framework Node/Express"
     },
     "GET/users": {
-        "controler": "nosql/populate",
-        "modelName": "Users",
-        "view": "usersCountry",
-        "pop_ref": "country"
-    },
-    "GET/exos": {
-        "controler": "nosql/finder",
-        "modelName": "Exercices",
-        "view": "exos"
-    },
-    "GET/exosJSON": {
-        "controler": "nosql/finder",
-        "modelName": "Exercices",
-        "view": "exos",
-        "return_type": "application/json"
-    },
-    "GET/countries": {
-        "controler": "nosql/finder",
-        "modelName": "Countries",
-        "view": "countries"
-    },
-    "GET/countriesJSON": {
-        "controler": "nosql/finder",
-        "modelName": "Countries",
-        "view": "countries",
-        "return_type": "application/json"
-    },
-    "GET/formUser": {
-        "controler": "nosql/findByIdWithList",
-        "modelName": "Users",
-        "modelList": "Countries",
-        "view": "formUser",
-        "form_action": "/modifyUser"
-    },
-    "POST/modifyUser": {
-        "controler": "nosql/updateById",
-        "modelName": "Users",
-        "view": "modifyUser"
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM users",
+        "view": "users",
+        "title": "Liste des utilisateurs"
     },
     "GET/newUser": {
-        "controler": "nosql/finder",
-        "modelName": "Users",
-        "modelList": "Countries",
+        "controler": "sql/selectListSchemas",
+        "sql_list": [
+            "SELECT * FROM countries"
+        ],
+        "tables_list": [
+            "countries"
+        ],
         "view": "formUser",
         "form_action": "/createUser",
-        "title": "Create a new user",
-        "libelle": "creation"
+        "del_label": "Utilisateur",
+        "libelle": "Création",
+        "title": "Ajouter un Utilisateur à l'application :"
     },
     "POST/createUser": {
-        "controler": "nosql/insertOne",
-        "modelName": "Users",
-        "view": "users"
+        "controler": "sql/insertSQL",
+        "sql_query": "INSERT INTO users (name, firstName, login, mdp, function, office, date_naiss, addresse1, addresse2, cp, city, code_countries, mobile_phone, home_phone) VALUES( ?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        "params_query": [
+            "name",
+            "firstName",
+            "login",
+            "mdp",
+            "function",
+            "office",
+            "date_naiss",
+            "addresse1",
+            "addresse2",
+            "cp",
+            "city",
+            "code_countries",
+            "mobile_phone",
+            "home_phone"
+        ],
+        "view": "users",
+        "redirect": "/users"
+    },
+    "GET/formUser": {
+        "controler": "sql/selectByIdAndListSchemas",
+        "sql_query": "SELECT * FROM users WHERE id_users=?",
+        "sql_list": [
+            "SELECT * FROM countries"
+        ],
+        "tables_list": [
+            "countries"
+        ],
+        "view": "formUser",
+        "form_action": "/modifyUser",
+        "del_label": "Utilisateur",
+        "libelle": "Modification",
+        "title": "Modifier un Utilisateur de l'application :"
+    },
+    "POST/modifyUser": {
+        "controler": "sql/updateSQL",
+        "sql_query": "UPDATE users SET name=?, firstName=?, login=?, mdp=?, function=?, office=?, date_naiss=?, addresse1=?, addresse2=?, cp=?, city=?, code_countries=?, mobile_phone=?, home_phone=? WHERE id_users=?",
+        "params_query": [
+            "name",
+            "firstName",
+            "login",
+            "mdp",
+            "function",
+            "office",
+            "date_naiss",
+            "addresse1",
+            "addresse2",
+            "cp",
+            "city",
+            "code_countries",
+            "mobile_phone",
+            "home_phone"
+        ],
+        "redirect": "/users"
     },
     "GET/deleteUser": {
-        "controler": "nosql/deleteById",
-        "modelName": "Users",
-        "view": "users"
-    },
-    "GET/formations": {
-        "controler": "nosql/populate",
-        "modelName": "Formations",
-        "view": "liste_formations",
-        "title": "Liste des formations",
-        "pop_ref": "formateur"
-    },
-    "GET/tabFormations": {
-        "controler": "nosql/populate",
-        "modelName": "Formations",
-        "view": "tabformations",
-        "title": "Liste des formations",
-        "pop_ref": "formateur"
-    },
-    "GET/formFormation": {
-        "controler": "nosql/findOneAndListSchemas",
-        "modelName": "Formations",
-        "modelList": [
-            "Formateurs",
-            "Countries"
-        ],
-        "view": "formFormation",
-        "form_action": "/modifyFormation",
-        "title": "Modification formation",
-        "libelle": "Modification",
-        "del_label": "cette Formation"
-    },
-    "GET/newFormation": {
-        "controler": "nosql/findListSchemas",
-        "modelList": [
-            "Formateurs",
-            "Countries"
-        ],
-        "view": "formFormation",
-        "form_action": "/createFormation",
-        "title": "Create a new Formation",
-        "libelle": "Création"
-    },
-    "POST/createFormation": {
-        "controler": "nosql/insertOne",
-        "modelName": "Formations",
-        "view": "liste_formations"
-    },
-    "POST/modifyFormation": {
-        "controler": "nosql/updateById",
-        "modelName": "Formations",
-        "view": "modifyFormation"
-    },
-    "GET/deleteFormation": {
-        "controler": "nosql/deleteById",
-        "modelName": "Formations",
-        "view": "liste_formations"
-    },
-    "GET/formateurs": {
-        "controler": "nosql/finder",
-        "modelName": "Formateurs",
-        "view": "liste_formateurs",
-        "title": "Liste des formateurs"
-    },
-    "GET/formFormateur": {
-        "controler": "nosql/findById",
-        "modelName": "Formateurs",
-        "view": "formFormateur",
-        "form_action": "/modifyFormateur",
-        "title": "Modification formateur",
-        "libelle": "Modification",
-        "del_label": "ce Formateur"
-    },
-    "GET/newFormateur": {
-        "controler": "nosql/findListSchemas",
-        "modelList": [
-            "Countries"
-        ],
-        "view": "formFormateur",
-        "form_action": "/createFormateur",
-        "title": "Create a new Formateur",
-        "libelle": "Création"
-    },
-    "POST/createFormateur": {
-        "controler": "nosql/insertOne",
-        "modelName": "Formateurs",
-        "view": "liste_formateurs"
-    },
-    "POST/modifyFormateur": {
-        "controler": "nosql/updateById",
-        "modelName": "Formateurs",
-        "view": "modifyFormateur"
-    },
-    "GET/deleteFormateur": {
-        "controler": "nosql/deleteById",
-        "modelName": "Formateurs",
-        "view": "liste_formateurs"
+        "controler": "sql/deleteSQLById",
+        "sql_query": "DELETE FROM users WHERE id_users=?",
+        "redirect": "/users"
     },
     "GET/selectSQL": {
         "controler": "sql/selectSQL",
@@ -227,11 +158,13 @@
         "title": "Ajoutez une pièce détachée",
         "redirect": "/formInsertPiece",
         "fieldUpload": [{
-            "name": "photo",
-            "maxCount": 1
-        }, {
-            "name": "doc",
-            "maxCount": 1
-        }]
+                "name": "photo",
+                "maxCount": 1
+            },
+            {
+                "name": "doc",
+                "maxCount": 1
+            }
+        ]
     }
 }

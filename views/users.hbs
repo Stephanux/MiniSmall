@@ -6,8 +6,7 @@
     {{else}}
     <option value="0">Select a user to modify his datas</option>
     {{#each data}}
-    <option value="{{this._id}}">{{this.name}} {{this.firstName}}-
-        {{this.function}}</option>
+    <option value="{{this.id_users}}">{{this.name}} {{this.firstName}}-{{this.function}}</option>
     {{/each}}
     {{/compare}}
 </select>

@@ -23,10 +23,10 @@
                     class="form-control" /><br />
             </div>
             <div class="form-group">
-                adresse1 : <input type="text" name="adresse1" value="{{data.adresse1}}" class="form-control" /><br />
+                adresse1 : <input type="text" name="addresse1" value="{{data.addresse1}}" class="form-control" /><br />
             </div>
             <div class="form-group">
-                adresse2 : <input type="text" name="adresse2" value="{{data.adresse2}}" class="form-control" /><br />
+                adresse2 : <input type="text" name="addresse2" value="{{data.addresse2}}" class="form-control" /><br />
             </div>
             <div class="form-group">
                 cp : <input type="text" name="cp" value="{{data.cp}}" class="form-control" /><br />
@@ -35,12 +35,12 @@
                 city : <input type="text" name="city" value="{{data.city}}" class="form-control" /><br />
             </div>
             <div class="form-group">
-                country : <select id="country" name="country">
-                    {{#each liste}}
-                        {{#compare ../data.country this.id operator='=='}}
-                            <option value="{{this._id}}" selected>{{this.name}} - {{this.code}}</option>
+                country : <select id="country" name="code_countries">
+                    {{#each datas.countries}}
+                        {{#compare ../data.code_countries this.code operator='=='}}
+                            <option value="{{this.code}}" selected>{{this.name_fr}} - {{this.code}}</option>
                         {{else}}
-                            <option value={{this._id}}>{{this.name}} - {{this.code}}</option>
+                            <option value={{this.code}}>{{this.name_fr}} - {{this.code}}</option>
                         {{/compare}}
                     {{/each}}
                 </select>
@@ -55,7 +55,7 @@
             </div>
             <hr>
             <input type="submit" value="Confirmer la {{libelle}}" class="button" />
-            <input type="button" value="Supprimer cet utilisateur" id="delbtn" class="button">
+            <input type="button" value="Supprimer cet {{del_label}}" id="delbtn" class="button">
     </form>
 </div>
 
@@ -64,11 +64,11 @@
     var form = document.getElementById('formAddUser');
     form.addEventListener('submit', function (evt) {
         var actionPost = "/" + form.action.split('/')[3];
-        if (actionPost == "/modifyUser") form.action += "/{{data._id}}";
+        if (actionPost == "/modifyUser") form.action += "/{{data.id_users}}";
         form.submit();
     });
     var btn_del = document.getElementById('delbtn');
     btn_del.addEventListener('click', function (evt) {
-        window.location = "/deleteUser/{{data._id}}";
+        window.location = "/deleteUser/{{data.id_users}}";
     });
 </script>
