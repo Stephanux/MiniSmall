@@ -158,6 +158,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 passport.use(new LocalStrategy(
+    // Version du code pour mongoDB via mongoose
     /*function(username, password, done) {
         global.schemas["Users"].findOne({
             login: username
@@ -181,6 +182,8 @@ passport.use(new LocalStrategy(
             return done(null, user);
         });
     }*/
+    //************************************************************************************** */
+    // Version du code pour base SQL via Sequelize
     function(username, password, done) {
         var params_value = [];
         params_value.push(username);

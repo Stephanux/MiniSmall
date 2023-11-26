@@ -97,6 +97,21 @@
         "sql_query": "DELETE FROM users WHERE id_users=?",
         "redirect": "/users"
     },
+    "GET/tab_users": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM users",
+        "view": "tabusers"
+    },
+    "GET/tab_countries": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM countries",
+        "view": "tabcountries"
+    },
+    "GET/tab_communes": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM communes",
+        "view": "tabcommunes"
+    },
     "GET/selectSQL": {
         "controler": "sql/selectSQL",
         "sql_query": "SELECT * FROM countries",

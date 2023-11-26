@@ -1,33 +1,51 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    margin: 1 em;
+    padding: 0;
+    color: #333;
+    background-color: #fff;
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
 }
 
 .barnav {
-  width: 100%;
+    width: 100%;
 }
 
 #nav {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 #nav li {
-  display: inline;
-  padding: 0;
-  margin: 0;
+    display: inline;
+    padding: 0;
+    margin: 0;
 }
 
-#nav a:link, #nav a:visited {
-  color: #000;
-  background: #b2b580;
+#nav a:link,
+#nav a:visited {
+    color: #000;
+    background: #b2b580;
 }
 
 .footer {
-  font: 9px "Arial";
-  background: #b2b580;
+    font: 9px "Arial";
+    background: #b2b580;
+}
+
+
+table#example.dataTable tbody tr:hover {
+    background-color: #ffa;
+}
+
+table#example.dataTable tbody tr:hover>.sorting_1 {
+    background-color: #ffa;
+}
+
+table#example.dataTable thead:hover {
+    background-color: #ffa;
 }

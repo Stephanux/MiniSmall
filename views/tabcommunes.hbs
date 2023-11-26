@@ -1,0 +1,28 @@
+<table id="example">
+<thead>
+   <tr> 
+    <th>Code_commune_INSEE</th>
+    <th>Nom_de_la_commune</th>
+    <th>Code_postal</th>
+    <th>Libelle_d_acheminement</th>
+    <th>Ligne_5</th>
+   </tr>
+</thead>
+<tbody>
+{{#each data}}
+   <tr>
+    <td>{{this.Code_commune_INSEE}}</td>
+    <td>{{this.Nom_de_la_commune}}</td>
+    <td>{{this.Code_postal}}</td>
+    <td>{{this.Libelle_d_acheminement}}</td>
+    <td>{{this.Ligne_5}}</td>
+   </tr>
+{{/each}}
+</tbody>
+</table>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let table = new DataTable('#example');
+});
+</script>

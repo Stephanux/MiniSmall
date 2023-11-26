@@ -19,9 +19,9 @@
 -- Current Database: `greta`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `greta` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `R504TP` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
-USE `greta`;
+USE `R504TP`;
 
 --
 -- Table structure for table `communes`

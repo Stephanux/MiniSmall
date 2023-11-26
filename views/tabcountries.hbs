@@ -1,0 +1,24 @@
+<table id="example">
+<thead>
+   <tr> 
+      <th>code</th>
+      <th>name_us</th>
+      <th>name_fr</th>
+   </tr>
+</thead>
+<tbody>
+{{#each data}}
+   <tr>
+     <td>{{this.code}}</td>
+     <td>{{this.name_us}}</td>
+     <td>{{this.name_fr}}</td>
+   </tr>
+{{/each}}
+</tbody>
+</table>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let table = new DataTable('#example');
+});
+</script>
