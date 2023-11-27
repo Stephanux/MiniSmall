@@ -31,16 +31,15 @@ router.get('/', function(req, res, next) {
         getDataFromTable(i, function() {
             if (req.message.return_type == null) {
                 // récupérer les données extraites de la base et les envoyées à une vue
-                res.render(req.message.view, {
-                    stitle: 'Connexion à BD SQL données Countries via Sequelize',
-                    title: req.message.title,
-                    libelle: req.message.libelle,
-                    del_label: req.message.del_label,
-                    form_action: req.message.form_action,
-                    msg: req.query.msg,
-                    datas: results, // Attention a renvoyer une variable avec un nom generique "data"
-                    data: results[req.message.sql_list[i]]
-                });
+                params_render = {};
+                for (param in global.actions_json[req.message.action]) {
+                    params_render[param] = (global.actions_json[req.message.action])[param];
+                }
+                params_render["datas"] = results;
+                params_render["data"] = results[req.message.sql_list[i]];
+                params_render["msg"] = req.query.msg;
+                console.log("params_render:", params_render);
+                res.render(req.message.view, params_render);
             } else {
                 res.setHeader('content-type', 'application/json');
                 res.send(result);
