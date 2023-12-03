@@ -1,19 +1,18 @@
 <div class="center">
 <h1> Express App : {{title}}</h1>
-<br>
 <div class="inputbox">
-<select name="formations" id="formation">
-    {{#compare data null operator="=="}}
-    <option value="rien">Il n'y a pas de données dans la base formation</option>
-    {{else}}
-    <option value="0">Sélectionner une formations</option>
-    {{#each data}}
-    <option value="{{this.id_formation}}">{{this.libelle}}-{{this.duree}}-{{this.prix}}</option>
-    {{/each}}
-    {{/compare}}
-</select>
+    <select name="formations" id="formation">
+        {{#compare data null operator="=="}}
+        <option value="rien">Il n'y a pas de données dans la base formation</option>
+        {{else}}
+        <option value="0">Sélectionner une formations</option>
+        {{#each data}}
+        <option value="{{this.id_formation}}">{{this.libelle}}-{{this.duree}}-{{this.prix}}</option>
+        {{/each}}
+        {{/compare}}
+    </select>
 </div>
-<h2>or</h2><br />
+<h2>or</h2>
 <div class="inputbox">
     <button id="newFormation">Create a Formation</button>
 </div>
