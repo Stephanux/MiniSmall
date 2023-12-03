@@ -1,46 +1,47 @@
-<table id="example">
-<thead>
-   <tr> 
-            <th>id_users</th>
-            <th>name</th>
-            <th>firstName</th>
-            <th>login</th>
-            <th>mdp</th>
-            <th>function</th>
-            <th>office</th>
-            <th>date_naiss</th>
-            <th>addresse1</th>
-            <th>addresse2</th>
-            <th>cp</th>
-            <th>city</th>
-            <th>code_countries</th>
-            <th>mobile_phone</th>
-            <th>home_phone</th>
-   </tr>
-</thead>
-<tbody>
-{{#each data}}
-   <tr>
-     <td>{{this.id_users}}</td>
-     <td>{{this.name}}</td>
-     <td>{{this.firstName}}</td>
-     <td>{{this.login}}</td>
-     <td>{{this.mdp}}</td>
-     <td>{{this.function}}</td>
-     <td>{{this.office}}</td>
-     <td>{{this.date_naiss}}</td>
-     <td>{{this.addresse1}}</td>
-     <td>{{this.addresse2}}</td>
-     <td>{{this.cp}}</td>
-     <td>{{this.city}}</td>
-     <td>{{this.code_countries}}</td>
-     <td>{{this.mobile_phone}}</td>
-     <td>{{this.home_phone}}</td>
-   </tr>
-{{/each}}
-</tbody>
-</table>
-
+<div class="inputbox">
+  <table id="example" class="display" style="width:100%">
+  <thead>
+    <tr> 
+              <th>id_users</th>
+              <th>name</th>
+              <th>firstName</th>
+              <th>login</th>
+              <th>mdp</th>
+              <th>function</th>
+              <th>office</th>
+              <th>date_naiss</th>
+              <th>addresse1</th>
+              <th>addresse2</th>
+              <th>cp</th>
+              <th>city</th>
+              <th>code_countries</th>
+              <th>mobile_phone</th>
+              <th>home_phone</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each data}}
+    <tr>
+      <td>{{this.id_users}}</td>
+      <td>{{this.name}}</td>
+      <td>{{this.firstName}}</td>
+      <td>{{this.login}}</td>
+      <td>{{this.mdp}}</td>
+      <td>{{this.function}}</td>
+      <td>{{this.office}}</td>
+      <td>{{this.date_naiss}}</td>
+      <td>{{this.addresse1}}</td>
+      <td>{{this.addresse2}}</td>
+      <td>{{this.cp}}</td>
+      <td>{{this.city}}</td>
+      <td>{{this.code_countries}}</td>
+      <td>{{this.mobile_phone}}</td>
+      <td>{{this.home_phone}}</td>
+    </tr>
+  {{/each}}
+  </tbody>
+  </table>
+</div>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     let table = new DataTable('#example');

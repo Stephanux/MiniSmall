@@ -1,0 +1,26 @@
+<table id="example">
+<thead>
+   <tr>
+     <th>Nom</th>
+     <th>Prénom</th>
+     <th>Spécialité</th>
+     <th>Prix jour</th>
+   </tr>
+</thead>
+<tbody>
+{{#each data}}
+   <tr>
+     <td>{{this.nom}}</td>
+     <td>{{this.prenom}}</td>
+     <td>{{this.specialite}}</td>
+     <td>{{this.prix_jour}}</td>
+   </tr>
+{{/each}}
+</tbody>
+</table>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let table = new DataTable('#example');
+});
+</script>

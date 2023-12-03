@@ -1,15 +1,17 @@
-<h1>{{title}}</h1>
-   <form action="/authenticated" method="POST">
-    <div>
-        <label>Username:</label>
+<div class="center">
+<h1>{{title}}</h1><br/>
+<form action="/authenticated" method="POST">
+    <div class="inputbox">
         <input type="text" name="username"/>
+        <span>Username</span>
     </div>
-    <br/>
-    <div>
-        <label>Password:</label>
+    <div class="inputbox">
         <input type="password" name="password"/>
+        <span>Password</span>
     </div>
-    <div>
-        <input type="submit" value="Log In"/>
+    <div class="inputbox">
+        <button id="login">Log In</button>
+        <!--input type="submit" value="Log In"/-->
     </div>
 </form>
+</div>

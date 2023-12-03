@@ -1,0 +1,44 @@
+<div class="center">
+
+<h1> Express App : {{title}}</h1>
+<br>
+<div class="inputbox">
+    <select name="formateurs" id="formateur">
+        {{#compare data null operator="=="}}
+            <option value="rien">Il n'y a pas de données dans la base formation</option>
+        {{else}}
+            <option value="0">Sélectionner un formateur</option>
+            {{#each data}}
+                {{#if this._id}}
+                    <option value="{{this._id}}">{{this.nom}}-{{this.prenom}}-{{this.specialite}}</option>
+                {{else}}
+                    <option value="{{this.id_formateur}}">{{this.nom}}-{{this.prenom}}-{{this.specialite}}</option>
+                {{/if}}
+            {{/each}}
+        {{/compare}}
+        </select>
+        <span>Formateur</span>
+    </div>
+    <h2>or</h2><br />
+    <div class="inputbox">
+        <button id="newFormateur">Créer un Formateur</button>
+    </div>
+</div>
+<script>
+    var usr = document.getElementById('formateur');
+    usr.addEventListener('change', function (evt) {
+        if (window.location.pathname == "/selectFormateursSQL") {
+            window.location = "/formFormateurSQL/" + usr.value;
+        } else {
+            window.location = "/formFormateur/" + usr.value;
+        }
+    });
+    var btn_new = document.getElementById('newFormateur');
+    btn_new.addEventListener('click', function (evt) {
+        if (window.location.pathname == "/selectFormateursSQL") {
+            window.location = "/newFormateurSQL";
+        } else {
+            window.location = "/newFormateur";
+        }
+    });
+</script>

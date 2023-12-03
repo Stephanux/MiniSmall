@@ -1,4 +1,4 @@
-<table>
+<table id="example">
 <thead>
    <tr>
      <th>Libellé</th>
@@ -24,3 +24,9 @@
 {{/each}}
 </tbody>
 </table>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let table = new DataTable('#example');
+});
+</script>

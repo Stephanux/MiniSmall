@@ -1,36 +1,112 @@
-<h1> Express App : {{title}}</h1>
-<div class="container">
-    <form method="POST" action="{{form_action}}" id="formAddFormateur">
-        <div class="form-group">
-            Nom : <input type="text" name="nom" value="{{data.nom}}" class="form-control" /><br />
-        </div>
-        <div class="form-group">
-            Prénom : <input type="text" name="prenom" value="{{data.prenom}}" class="form-control" /><br />
-        </div>
-        <div class="form-group">
-            Spécialité : <input type="text" name="specialite" value="{{data.specialite}}" class="form-control" /><br />
-        </div>
-        <div class="form-group">
-            prix/jour : <input type="text" name="prix_jour" value="{{data.prix_jour}}" class="form-control" /><br />
-        </div>
-        <hr>
-        <input type="submit" value="Confirmer la {{libelle}}" class="button" />
-        <input type="button" value="Supprimer {{del_label}}" id="delbtn" class="button">
-    </form>
+<div class="center">
+    <h1> Express App : {{title}}</h1>
+    <div class="container">
+        <form method="POST" action="{{form_action}}" id="formAddFormateur">
+            <div class="inputbox">
+                <input type="text" name="nom" value="{{data.nom}}" class="form-control" />
+                <span>Nom</span>
+            </div>
+            <div class="inputbox">
+                <input type="text" name="prenom" value="{{data.prenom}}" class="form-control" />
+                <span>Prénom</span>
+            </div>
+            <div class="inputbox">
+                <input type="text" name="specialite" value="{{data.specialite}}" class="form-control" />
+                <span>Spécialité</span>
+            </div>
+            <div class="inputbox">
+                <input type="text" name="prix_jour" value="{{data.prix_jour}}" class="form-control" />
+                <span>prix/jour</span>
+            </div>
+            <div class="inputbox">
+                <select id="country" name="code_country">
+                    {{#each datas.countries}}
+                        {{#compare ../data.code_country this.code operator='=='}}
+                            <option value="{{this.code}}" selected>{{this.name_fr}} - {{this.code}}</option>
+                        {{else}}
+                            <option value={{this.code}}>{{this.name_fr}} - {{this.code}}</option>
+                        {{/compare}}
+                    {{/each}}
+                </select>
+                <span>Pays</span>
+            </div>
+            <div class="inputbox" id="div_dpt">
+                <select id="dpt" name="dpt">
+                    {{#each datas.departements}}
+                        {{#compare ../data.id_dpt this.id_dpt operator='=='}}
+                            <option value="{{this.id_dpt}}" selected>{{this.libelle}} - {{this.id_dpt}}</option>
+                        {{else}}
+                            <option value="{{this.id_dpt}}">{{this.libelle}} - {{this.id_dpt}}</option>
+                        {{/compare}}
+                    {{/each}}
+                </select>
+                <span>Département</span>
+            </div>
+            <div class="inputbox">
+                <select id="communes" name="code_commune">
+                    {{#each datas.communes}}
+                        {{#compare ../data.code_commune this.Code_commune_INSEE operator='=='}}
+                            <option value="{{this.Code_commune_INSEE}}" selected>{{this.Nom_de_la_commune}} - {{this.Code_postal}}</option>
+                        {{else}}
+                            <option value="{{this.Code_commune_INSEE}}">{{this.Nom_de_la_commune}} - {{this.Code_postal}}</option>
+                        {{/compare}}
+                    {{/each}}
+                </select>
+                <span>Communes</span>
+            </div>
+            <table class="center">
+                <tr>
+                    <td>
+                        <div class="inputbox">
+                            <button>Confirmer la {{libelle}}</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="inputbox">
+                            <button value="" id="delbtn" class="button">Supprimer {{del_label}}</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </div>
-
 {{!-- Script de validation du formulaire de modification --}}
 <script>
     var form = document.getElementById('formAddFormateur');
     var actionPost = "/" + form.action.split('/')[3];
     form.addEventListener('submit', function (evt) {
-        if (actionPost == "/modifyFormateur") form.action += "/{{data._id}}";
+        if (actionPost == "/modifyFormateur") form.action += "/{{data.id_formateur}}";
         else if (actionPost == "/modifyFormateurSQL") form.action += "/{{data.id_formateur}}";
         form.submit();
     });
     var btn_del = document.getElementById('delbtn');
     btn_del.addEventListener('click', function (evt) {
-       if (actionPost == "/modifyFormateur") window.location = "/deleteFormateur/{{data._id}}";
+       if (actionPost == "/modifyFormateur") window.location = "/deleteFormateur/{{data.id_formateur}}";
        else if (actionPost == "/modifyFormateurSQL") window.location = "/deleteFormateurSQL/{{data.id_formateur}}";
+    });
+    var dpt = document.getElementById('dpt');
+    var div_dpt = document.getElementById('div_dpt');
+    var com = document.getElementById('communes');
+    if (actionPost == "/modifyFormateur") {
+        dpt.style.visibility = 'hidden';
+        div_dpt.style.visibility = 'hidden';
+    }
+    // Gestion de la liste des communes en fonction du departement sélectionné via ajax
+    dpt.addEventListener('change', function (evt) {
+        function reqListener() {
+            console.log("liste_communes: ", this.responseText);
+            const json = this.responseText;
+            const villes = JSON.parse(json);
+            for (i=0;i < villes.length; i++) {
+                v=villes[i];
+                let newOption = new Option(v.Nom_de_la_commune,v.Code_commune_INSEE);
+                com.add(newOption, undefined);
+            }  
+        }
+        const req = new XMLHttpRequest();
+        req.addEventListener("load", reqListener);
+        req.open("GET", "/getCommunesDpt/"+parseInt(dpt.value)*1000+"/"+(parseInt(dpt.value)*1000+1000));
+        req.send();
     });
 </script>
