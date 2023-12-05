@@ -61,6 +61,20 @@ body {
     font-size: 1.2em;
 }
 
+input[type="button"],
+input.foo[type="submit"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    border: 2px solid #000;
+    outline: none;
+    background: rgb(127, 176, 224);
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 1.2em;
+}
+
 .center .inputbox button {
     position: absolute;
     top: 0;
