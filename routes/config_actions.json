@@ -18,7 +18,7 @@
     "GET/users": {
         "controler": "sql/selectSQL",
         "sql_query": "SELECT * FROM users",
-        "view": "users",
+        "view": "Users/users",
         "title": "Liste des utilisateurs"
     },
     "GET/newUser": {
@@ -29,7 +29,7 @@
         "tables_list": [
             "countries"
         ],
-        "view": "formUser",
+        "view": "Users/formUser",
         "form_action": "/createUser",
         "del_label": "Utilisateur",
         "libelle": "Création",
@@ -54,7 +54,6 @@
             "mobile_phone",
             "home_phone"
         ],
-        "view": "users",
         "redirect": "/users"
     },
     "GET/formUser": {
@@ -66,7 +65,7 @@
         "tables_list": [
             "countries"
         ],
-        "view": "formUser",
+        "view": "Users/formUser",
         "form_action": "/modifyUser",
         "del_label": "Utilisateur",
         "libelle": "Modification",
@@ -93,173 +92,87 @@
         ],
         "redirect": "/users"
     },
+    "GET/tab_users": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM users",
+        "view": "Users/tabusers"
+    },
     "GET/deleteUser": {
         "controler": "sql/deleteSQLById",
         "sql_query": "DELETE FROM users WHERE id_users=?",
         "redirect": "/users"
     },
-    "GET/formateurs": {
+    "GET/newAtome": {
+        "controler": "getView",
+        "view": "Atomes/formAtome",
+        "form_action": "/createAtome",
+        "del_label": "Atome",
+        "libelle": "Création",
+        "title": "Ajouter une nouvel Atome"
+    },
+    "GET/deleteAtome": {
+        "controler": "sql/deleteSQLById",
+        "sql_query": "DELETE FROM atome WHERE id=?",
+        "redirect": "/atomes"
+    },
+    "GET/atomes": {
         "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM formateurs",
-        "view": "liste_formateurs"
+        "sql_query": "SELECT * FROM atome",
+        "view": "Atomes/liste_atomes",
+        "title": "Liste des atomes"
     },
-    "GET/newFormateur": {
-        "controler": "sql/selectListSchemas",
-        "sql_list": [
-            "SELECT * FROM countries",
-            "SELECT * FROM departements"
-        ],
-        "tables_list": [
-            "countries",
-            "departements"
-        ],
-        "view": "formFormateur",
-        "form_action": "/createFormateur",
-        "title": "Create a new Formateur",
-        "libelle": "Création"
-    },
-    "POST/createFormateur": {
+    "POST/createAtome": {
         "controler": "sql/insertSQL",
-        "sql_query": "INSERT INTO formateurs (nom, prenom, specialite, prix_jour, code_country, code_commune) VALUES (?,?,?,?,?,?)",
+        "sql_query": "INSERT INTO atome (nom, symbole, numero, electron, masse_volumique, masse_atomique, is_radioactif) VALUES( ?,?,?,?,?,?,?)",
         "params_query": [
             "nom",
-            "prenom",
-            "specialite",
-            "prix_jour",
-            "code_country",
-            "code_commune"
+            "symbole",
+            "numero",
+            "electron",
+            "masse_volumique",
+            "masse_atomique",
+            "is_radioactif"
         ],
-        "view": "liste_formateurs",
-        "redirect": "/formateurs"
+        "redirect": "/atomes"
     },
-    "GET/formFormateur": {
-        "controler": "sql/selectByIdAndListSchemas",
-        "sql_list": [
-            "SELECT * FROM countries",
-            "SELECT * FROM departements",
-            "SELECT * FROM communes"
-        ],
-        "tables_list": [
-            "countries",
-            "departements",
-            "communes"
-        ],
-        "view": "formFormateur",
-        "sql_query": "SELECT * FROM formateurs WHERE id_formateur=?",
-        "form_action": "/modifyFormateur",
-        "title": "Modification formateur",
-        "libelle": "Modification",
-        "del_label": "Formateur"
-    },
-    "POST/modifyFormateur": {
+    "POST/modifyAtome": {
         "controler": "sql/updateSQL",
-        "sql_query": "UPDATE formateurs SET nom=?, prenom=?, specialite=?, prix_jour=?, code_country=?, code_commune=? WHERE id_formateur=?",
+        "sql_query": "UPDATE atome SET nom=?, symbole=?, numero=?, electron=?, masse_volumique=?, masse_atomique=?, is_radioactif=? WHERE id=?",
         "params_query": [
             "nom",
-            "prenom",
-            "specialite",
-            "prix_jour",
-            "code_country",
-            "code_commune"
+            "symbole",
+            "numero",
+            "electron",
+            "masse_volumique",
+            "masse_atomique",
+            "is_radioactif"
         ],
-        "redirect": "/formateurs"
+        "redirect": "/atomes"
     },
-    "GET/deleteFormateur": {
-        "controler": "sql/deleteSQLById",
-        "sql_query": "DELETE FROM formateurs WHERE id_formateur=?",
-        "redirect": "/formateurs"
-    },
-    "GET/tabFormateurs": {
+    "GET/formAtome": {
         "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM formateurs",
-        "view": "tabformateurs"
-    },
-    "GET/formations": {
-        "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM formations",
-        "view": "liste_formations"
-    },
-    "GET/newFormation": {
-        "controler": "sql/selectListSchemas",
-        "sql_list": [
-            "SELECT * FROM formateurs"
-        ],
-        "tables_list": [
-            "formateurs"
-        ],
-        "view": "formFormation",
-        "form_action": "/createFormation",
-        "title": "Create a new Formation",
-        "libelle": "Création"
-    },
-    "POST/createFormation": {
-        "controler": "sql/insertSQL",
-        "sql_query": "INSERT INTO formations (libelle, duree, plan_cours, prix, id_formateur) VALUES (?,?,?,?,?)",
-        "params_query": [
-            "libelle",
-            "duree",
-            "plan_cours",
-            "prix",
-            "id_formateur"
-        ],
-        "view": "liste_formations",
-        "redirect": "/formations"
-    },
-    "GET/formFormation": {
-        "controler": "sql/selectByIdAndListSchemas",
-        "sql_list": [
-            "SELECT * FROM formateurs"
-        ],
-        "tables_list": [
-            "formateurs"
-        ],
-        "view": "formFormation",
-        "sql_query": "SELECT * FROM formations WHERE id_formation=?",
-        "form_action": "/modifyFormation",
-        "title": "Modification formation",
+        "sql_query": "SELECT * FROM atome WHERE id=?",
+        "view": "Atomes/formAtome",
+        "form_action": "/modifyAtome",
+        "del_label": "Atome",
         "libelle": "Modification",
-        "del_label": "Formation"
+        "title": "Modifier les données d'un Atome :"
     },
-    "POST/modifyFormation": {
-        "controler": "sql/updateSQL",
-        "sql_query": "UPDATE formations SET libelle=?, duree=?, plan_cours=?, prix=?, id_formateur=? WHERE id_formation=?",
-        "params_query": [
-            "libelle",
-            "duree",
-            "plan_cours",
-            "prix",
-            "id_formateur"
-        ],
-        "redirect": "/formations"
-    },
-    "GET/deleteFormation": {
-        "controler": "sql/deleteSQLById",
-        "sql_query": "DELETE FROM formations WHERE id_formation=?",
-        "redirect": "/formations"
-    },
-    "GET/tabFormations": {
+    "GET/tabAtomes": {
         "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM formations",
-        "view": "tabformations"
+        "sql_query": "SELECT * FROM atome",
+        "view": "Atomes/tabAtomes"
     },
-    "GET/getCommunesDpt": {
+    "GET/jsonAtome": {
         "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM communes WHERE  Code_commune_INSEE BETWEEN ? AND ?",
+        "sql_query": "SELECT * FROM atome",
+        "view": "Atomes/tabPeriodique.hbs",
         "return_type": "application/json"
     },
-    "GET/tab_users": {
-        "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM users",
-        "view": "tabusers"
-    },
-    "GET/tab_countries": {
+    "GET/jsonCountries": {
         "controler": "sql/selectSQL",
         "sql_query": "SELECT * FROM countries",
-        "view": "tabcountries"
-    },
-    "GET/tab_communes": {
-        "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM communes",
-        "view": "tabcommunes"
+        "view": "Countries/tabcountries.hbs",
+        "return_type": "application/json"
     }
 }
