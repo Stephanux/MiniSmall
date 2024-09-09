@@ -111,13 +111,14 @@ if (global.config.sequelize.used == "True") {
             idle: 10000
         }
     });
+    try {
+        sequelize.authenticate();
+        console.log('Sequelize : Connection has been established successfully.');
+    } catch (error) {
+        console.error('Sequelize: Unable to connect to the database:', error);
+    }
 }
-try {
-    sequelize.authenticate();
-    console.log('Sequelize : Connection has been established successfully.');
-} catch (error) {
-    console.error('Sequelize: Unable to connect to the database:', error);
-}
+
 
 var app = express();
 

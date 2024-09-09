@@ -15,6 +15,63 @@
         "view": "login",
         "title": "Bienvenue dans le framework Node/Express"
     },
+    "GET/usersmg": {
+        "controler": "nosql/populate",
+        "modelName": "Users",
+        "view": "usersCountry",
+        "pop_ref": "country"
+    },
+    "GET/exosmg": {
+        "controler": "nosql/finder",
+        "modelName": "Exercices",
+        "view": "exos"
+    },
+    "GET/exosJSONmg": {
+        "controler": "nosql/finder",
+        "modelName": "Exercices",
+        "view": "exos",
+        "return_type": "application/json"
+    },
+    "GET/countriesmg": {
+        "controler": "nosql/finder",
+        "modelName": "Countries",
+        "view": "countries"
+    },
+    "GET/countriesJSONmg": {
+        "controler": "nosql/finder",
+        "modelName": "Countries",
+        "view": "countries",
+        "return_type": "application/json"
+    },
+    "GET/formUsermg": {
+        "controler": "nosql/findByIdWithList",
+        "modelName": "Users",
+        "modelList": "Countries",
+        "view": "formUser",
+        "form_action": "/modifyUser"
+    },
+    "POST/modifyUsermg": {
+        "controler": "nosql/updateById",
+        "modelName": "Users",
+        "view": "modifyUser"
+    },
+    "GET/newUsermg": {
+        "controler": "nosql/finder",
+        "modelName": "Users",
+        "modelList": "Countries",
+        "view": "formUser",
+        "libelle": "creation"
+    },
+    "POST/createUsermg": {
+        "controler": "nosql/insertOne",
+        "modelName": "Users",
+        "view": "users"
+    },
+    "GET/deleteUsermg": {
+        "controler": "nosql/deleteById",
+        "modelName": "Users",
+        "view": "users"
+    },
     "GET/users": {
         "controler": "sql/selectSQL",
         "sql_query": "SELECT * FROM users",
