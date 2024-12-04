@@ -4,11 +4,11 @@
     },
     "sequelize": {
         "used": "True",
-        "dialect": "mariadb",
+        "dialect": "mysql",
         "host": "localhost",
         "port": "3306",
         "databaseName": "R504TP",
-        "userName": "admin",
+        "userName": "root",
         "password": "azerty"
     },
     "mongodb": {

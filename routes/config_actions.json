@@ -169,7 +169,7 @@
             "tél. mobile": "mobile_phone",
             "tél. domicile": "home_phone"
         },
-        "view": "tab_generic"
+        "view": "Generic/tab_generic"
     },
     "GET/deleteUser": {
         "controler": "sql/deleteSQLById",
@@ -190,8 +190,8 @@
     },
     "GET/tabFormations": {
         "controler": "sql/selectSQL",
-        "sql_query": "SELECT id_formation, libelle, duree, plan_cours, prix, fk_formateur FROM formations INNER JOIN formateurs ON formations.fk_formateur = formateurs.id_formateur",
-        "view": "tab_generic",
+        "sql_query": "SELECT * FROM formations, formateurs WHERE formations.id_formateur=formateurs.id_formateur;",
+        "view": "Generic/tab_generic",
         "tab_columns": {
             "N°Formation": "id_formation",
             "libelle": "libelle",
