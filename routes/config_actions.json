@@ -152,7 +152,24 @@
     "GET/tab_users": {
         "controler": "sql/selectSQL",
         "sql_query": "SELECT * FROM users",
-        "view": "Users/tabusers"
+        "tab_columns": {
+            "clée": "id_users",
+            "Nom": "name",
+            "Prénom": "firstName",
+            "Identifiant":"login",
+            "Mot de Passe": "mdp",
+            "Fonction": "function",
+            "Bureau": "office",
+            "Date Naissance": "date_naiss",
+            "Adresse1": "addresse1",
+            "Adresse2":"addresse2",
+            "Code postal": "cp",
+            "Ville": "city",
+            "code pays": "code_countries",
+            "tél. mobile": "mobile_phone",
+            "tél. domicile": "home_phone"
+        },
+        "view": "tab_generic"
     },
     "GET/deleteUser": {
         "controler": "sql/deleteSQLById",
@@ -164,5 +181,87 @@
         "sql_query": "SELECT * FROM countries",
         "view": "Countries/tabcountries.hbs",
         "return_type": "application/json"
+    },
+    "GET/formations": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM formations",
+        "view": "Formations/liste_formations",
+        "title": "Liste des formations"
+    },
+    "GET/tabFormations": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT id_formation, libelle, duree, plan_cours, prix, fk_formateur FROM formations INNER JOIN formateurs ON formations.fk_formateur = formateurs.id_formateur",
+        "view": "tab_generic",
+        "tab_columns": {
+            "N°Formation": "id_formation",
+            "libelle": "libelle",
+            "durée": "duree",
+            "Plan de cours": "plan_cours",
+            "Prix": "prix",
+            "N° formateur": "fk_formateur",
+            "Nom formateur": "nom",
+            "Prénom formateur": "prenom",
+            "Spécialité": "specialite",
+            "Prix Jour": "prix_jour"
+        },
+        "title": "Liste des formations"
+    },
+    "GET/formFormation": {
+       "controler": "sql/selectByIdAndListSchemas",
+        "sql_query": "SELECT * FROM formations WHERE id_formation=?",
+        "sql_list": [
+            "SELECT * FROM formateurs"
+        ],
+        "tables_list": [
+            "formateurs"
+        ],
+        "view": "Formations/formFormation",
+        "form_action": "/modifyFormation",
+        "del_label": "Formations",
+        "libelle": "Formation",
+        "title": "Modifier une formation de l'application :"
+    },
+    "GET/newFormation": {
+        "controler": "sql/selectListSchemas",
+        "sql_list": [
+            "SELECT * FROM formateurs"
+        ],
+        "tables_list": [
+            "formateurs"
+        ],
+        "view": "Formations/formFormation",
+        "form_action": "/createFormation",
+        "del_label": "Formation",
+        "libelle": "Création",
+        "title": "Ajouter une formation à l'application :"
+    },
+    "POST/createFormation": {
+        "controler": "sql/insertSQL",
+        "sql_query": "INSERT INTO formations (libelle, duree, plan_cours, prix, id_formateur) VALUES( ?,?,?,?,?)",
+        "params_query": [
+            "libelle", 
+            "duree", 
+            "plan_cours", 
+            "prix",
+            "id_formateur"
+        ],
+        "redirect": "/formations"
+    },
+    "POST/modifyFormation": {
+        "controler": "sql/updateSQL",
+        "sql_query": "UPDATE formations SET libelle=?, duree=?, plan_cours=?, prix=?, id_formateur=?",
+        "params_query": [
+           "libelle", 
+            "duree", 
+            "plan_cours", 
+            "prix",
+            "id_formateur"
+        ],
+        "redirect": "/formations"
+    },
+    "GET/deleteFormation": {
+        "controler": "sql/deleteSQLById",
+        "sql_query": "DELETE FROM formations WHERE id_formation=?",
+        "redirect": "/formations"
     }
 }
