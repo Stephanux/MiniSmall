@@ -176,21 +176,9 @@
         "sql_query": "DELETE FROM users WHERE id_users=?",
         "redirect": "/users"
     },
-    "GET/jsonCountries": {
-        "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM countries",
-        "view": "Countries/tabcountries.hbs",
-        "return_type": "application/json"
-    },
-    "GET/formations": {
-        "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM formations",
-        "view": "Formations/liste_formations",
-        "title": "Liste des formations"
-    },
     "GET/tabFormations": {
         "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM formations, formateurs WHERE formations.id_formateur=formateurs.id_formateur;",
+        "sql_query": "SELECT id_formation, libelle, duree, plan_cours, prix, formations.id_formateur, nom, prenom, specialite, prix_jour  FROM formations, formateurs WHERE formations.id_formateur=formateurs.id_formateur;",
         "view": "Generic/tab_generic",
         "tab_columns": {
             "N°Formation": "id_formation",
@@ -198,7 +186,7 @@
             "durée": "duree",
             "Plan de cours": "plan_cours",
             "Prix": "prix",
-            "N° formateur": "fk_formateur",
+            "N° formateur": "id_formateur",
             "Nom formateur": "nom",
             "Prénom formateur": "prenom",
             "Spécialité": "specialite",
@@ -215,7 +203,7 @@
         "tables_list": [
             "formateurs"
         ],
-        "view": "Formations/formFormation",
+        "view": "Generic/formGeneric",
         "form_action": "/modifyFormation",
         "del_label": "Formations",
         "libelle": "Formation",
@@ -249,7 +237,7 @@
     },
     "POST/modifyFormation": {
         "controler": "sql/updateSQL",
-        "sql_query": "UPDATE formations SET libelle=?, duree=?, plan_cours=?, prix=?, id_formateur=?",
+        "sql_query": "UPDATE formations SET libelle=?, duree=?, plan_cours=?, prix=?, id_formateur=? WHERE id_formation=?",
         "params_query": [
            "libelle", 
             "duree", 
@@ -263,5 +251,99 @@
         "controler": "sql/deleteSQLById",
         "sql_query": "DELETE FROM formations WHERE id_formation=?",
         "redirect": "/formations"
+    },
+    "GET/tab_countries": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM countries",
+        "view": "Countries/tabcountries.hbs"
+    },
+    "GET/json_Countries": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM countries",
+        "view": "Countries/tabcountries.hbs",
+        "return_type": "application/json"
+    },
+    "GET/tab_communes":{
+         "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM communes",
+        "view": "Communes/tabcommunes.hbs"
+    },
+    "GET/json_communes":{
+         "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM communes",
+        "view": "Communes/tabcommunes.hbs",
+        "return_type": "application/json"
+    },
+    "GET/formations": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM formations",
+        "view": "Formations/liste_formations",
+        "title": "Liste des formations"
+    },
+    "GET/formateurs": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM formateurs",
+        "view": "Formateurs/liste_formateurs"
+    },
+    "GET/newFormateur": {
+        "controler": "sql/selectListSchemas",
+        "sql_list": [
+            "SELECT * FROM countries", "SELECT * FROM departements"
+        ],
+        "tables_list": [
+            "countries", "departements"
+        ],
+        "view": "Generic/formGeneric",
+        "form_action": "/createFormateur",
+        "title": "Create a new Formateur",
+        "libelle": "Création"
+    },
+    "POST/createFormateur": {
+        "controler": "sql/insertSQL",
+        "sql_query": "INSERT INTO formateurs (nom, prenom, specialite, prix_jour) VALUES (?,?,?,?)",
+        "params_query": [
+            "nom",
+            "prenom",
+            "specialite",
+            "prix_jour",
+            "code_country",
+            "code_commune"
+        ],
+
+        "view": "Formateurs/liste_formateurs",
+        "redirect": "/formateurs"
+    },
+    "GET/formFormateur": {
+        "controler": "sql/selectSQLById",
+        "view": "Generic/formGeneric",
+        "label_id": "id_formateur",
+        "sql_query": "SELECT * FROM formateurs WHERE id_formateur=?",
+        "form_action": "/modifyFormateur",
+        "title": "Modification formateur",
+        "libelle": "Modification",
+        "del_label": "ce Formateur"
+    },
+    "POST/modifyFormateur": {
+        "controler": "sql/updateSQL",
+        "sql_query": "UPDATE formateurs SET nom=?, prenom=?, specialite=?, prix_jour=?, code_country=?, code_commune=? WHERE id_formateur=?",
+        "params_query": [
+            "nom",
+            "prenom",
+            "specialite",
+            "prix_jour",
+            "code_country",
+            "code_commune"
+        ],
+        "redirect": "/formateurs"
+    },
+    "GET/deleteFormateur": {
+        "controler": "sql/deleteSQLById",
+        "sql_query": "DELETE FROM formateurs WHERE id_formateur=?",
+        "redirect": "/formateurs"
+    },
+    "GET/tabFormateurs": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM formateurs",
+        "view": "Formateurs/tabformateurs"
     }
 }

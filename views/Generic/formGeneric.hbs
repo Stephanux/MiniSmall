@@ -1,0 +1,43 @@
+<div class="center" style="padding-top: 4px;padding-bottom: 4px;">
+    <h1> Express App : {{title}}</h1>
+    <div class="container">
+        <form method="POST" action="{{form_action}}" id="formAdd">
+            {{#each data}}
+            {{!-- trouver le moyen de tester si clé externe pour afficher une lite déroulante--}}
+                <div class="inputbox">
+                <input type="text" name="{{@key}}" id="{{@key}}" value="{{.}}" class="form-control" />
+                <span>{{@key}}</span>
+                </div><br>
+            {{/each}}
+            <table class="center">
+                <tr>
+                    <td>
+                        <div class="inputbox">
+                            <button>Confirmer la {{libelle}}</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="inputbox">
+                            <button value="" type="button" id="delbtn" class="button">Supprimer {{del_label}}</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+{{!-- Script de validation du formulaire de modification --}}
+<script>
+    //var list_formateurs = {{liste}};
+    var form = document.getElementById('formAdd');
+    var id="{{label_id}}";
+    form.addEventListener('submit', function (evt) {
+        var actionPost = "/" + form.action.split('/')[3];
+        if (actionPost == "/modifyFormation") form.action += "/"+document.URL.split('/')[4];
+        form.submit();
+    });
+    var btn_del = document.getElementById('delbtn');
+    btn_del.addEventListener('click', function (evt) {
+        window.location = "/deleteFormation/"+document.URL.split('/')[4];
+    });
+</script>
