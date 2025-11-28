@@ -35,12 +35,23 @@ router.get(('/:id'), function(req, res) {
                 getDataFromTable(i, function() {
                     if (req.message.return_type == null) {
                         // récupérer les données extraites de la base et les envoyées à une vue
+                        console.log("rendering with ",{
+                            stitle: 'Connexion à BD SQL données Countries via Sequelize',
+                            title: req.message.title,
+                            libelle: req.message.libelle,
+                            del_label: req.message.del_label,
+                            form_action: req.message.form_action,
+                            fkey: req.message.fkey,
+                            datas: results, // Attention a renvoyer une variable avec un nom generique
+                            data: result[0]
+                        })
                         res.render(req.message.view, {
                             stitle: 'Connexion à BD SQL données Countries via Sequelize',
                             title: req.message.title,
                             libelle: req.message.libelle,
                             del_label: req.message.del_label,
                             form_action: req.message.form_action,
+                            fkey: req.message.fkey,
                             datas: results, // Attention a renvoyer une variable avec un nom generique
                             data: result[0]
                         });

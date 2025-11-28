@@ -198,11 +198,13 @@
        "controler": "sql/selectByIdAndListSchemas",
         "sql_query": "SELECT * FROM formations WHERE id_formation=?",
         "sql_list": [
-            "SELECT * FROM formateurs"
+            "SELECT id_formateur as idfk, nom, prenom, specialite, prix_jour FROM formateurs"
         ],
         "tables_list": [
             "formateurs"
         ],
+        "fkey": "id_formateur",
+        "liste_name" : "formateurs",
         "view": "Generic/formGeneric",
         "form_action": "/modifyFormation",
         "del_label": "Formations",
@@ -305,9 +307,7 @@
             "nom",
             "prenom",
             "specialite",
-            "prix_jour",
-            "code_country",
-            "code_commune"
+            "prix_jour"
         ],
 
         "view": "Formateurs/liste_formateurs",
@@ -325,14 +325,12 @@
     },
     "POST/modifyFormateur": {
         "controler": "sql/updateSQL",
-        "sql_query": "UPDATE formateurs SET nom=?, prenom=?, specialite=?, prix_jour=?, code_country=?, code_commune=? WHERE id_formateur=?",
+        "sql_query": "UPDATE formateurs SET nom=?, prenom=?, specialite=?, prix_jour=? WHERE id_formateur=?",
         "params_query": [
             "nom",
             "prenom",
             "specialite",
-            "prix_jour",
-            "code_country",
-            "code_commune"
+            "prix_jour"
         ],
         "redirect": "/formateurs"
     },

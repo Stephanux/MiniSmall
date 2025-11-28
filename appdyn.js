@@ -41,6 +41,9 @@ hbs.registerHelper('compare', function(lvalue, rvalue, options) {
         },
         '===': function(l, r) {
             return l === r;
+        },
+        '!=': function(l,r) {
+            return l != r;
         }
     }
     if (!operators[operator])
