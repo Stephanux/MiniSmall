@@ -42,6 +42,7 @@ router.get(('/:id'), function(req, res) {
                             del_label: req.message.del_label,
                             form_action: req.message.form_action,
                             fkey: req.message.fkey,
+                            type_form: req.message.type_form,
                             datas: results, // Attention a renvoyer une variable avec un nom generique
                             data: result[0]
                         })
@@ -52,6 +53,7 @@ router.get(('/:id'), function(req, res) {
                             del_label: req.message.del_label,
                             form_action: req.message.form_action,
                             fkey: req.message.fkey,
+                            type_form: req.message.type_form,
                             datas: results, // Attention a renvoyer une variable avec un nom generique
                             data: result[0]
                         });

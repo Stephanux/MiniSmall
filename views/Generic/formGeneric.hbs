@@ -3,10 +3,15 @@
     <div class="container">
         <form method="POST" action="{{form_action}}" id="formAdd">
             {{#each data}}
+      
             {{!-- trouver le moyen de tester si clé externe pour afficher une lite déroulante--}}
                 {{#compare @key ../fkey operator="!="}}
                       <div class="inputbox">
-                        <input type="text" name="{{@key}}" id="{{@key}}" value="{{.}}" class="form-control" />
+                        {{#compare ../type_form "create" operator="==="}}
+                            <input type="text" name="{{@key}}" id="{{@key}}" value="" class="form-control" />
+                        {{else}}
+                            <input type="text" name="{{@key}}" id="{{@key}}" value="{{.}}" class="form-control" />
+                        {{/compare}}
                         <span>{{@key}}</span>
                     </div><br>
                 {{else}}   

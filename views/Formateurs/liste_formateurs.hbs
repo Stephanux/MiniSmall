@@ -36,9 +36,9 @@
     var btn_new = document.getElementById('newFormateur');
     btn_new.addEventListener('click', function (evt) {
         if (window.location.pathname == "/selectFormateursSQL") {
-            window.location = "/newFormateurSQL";
+            window.location = "/newFormateurSQL"+ usr.value;
         } else {
-            window.location = "/newFormateur";
+            window.location = "/newFormateur"+ usr.value;
         }
     });
 </script>

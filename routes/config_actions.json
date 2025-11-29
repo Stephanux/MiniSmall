@@ -176,6 +176,16 @@
         "sql_query": "DELETE FROM users WHERE id_users=?",
         "redirect": "/users"
     },
+    "GET/formations": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT id_formation as idfk, libelle, duree, plan_cours, prix, id_formateur FROM formations",
+        "view": "Generic/listeGeneric",
+        "title_liste": "formations",
+        "id_btn": "btn_new",
+        "action_modify": "formFormation",
+        "action_create": "newFormation",
+        "title": "Liste des formations"
+    },
     "GET/tabFormations": {
         "controler": "sql/selectSQL",
         "sql_query": "SELECT id_formation, libelle, duree, plan_cours, prix, formations.id_formateur, nom, prenom, specialite, prix_jour  FROM formations, formateurs WHERE formations.id_formateur=formateurs.id_formateur;",
@@ -205,6 +215,7 @@
         ],
         "fkey": "id_formateur",
         "liste_name" : "formateurs",
+        "type_form": "modify",
         "view": "Generic/formGeneric",
         "form_action": "/modifyFormation",
         "del_label": "Formations",
@@ -212,14 +223,18 @@
         "title": "Modifier une formation de l'application :"
     },
     "GET/newFormation": {
-        "controler": "sql/selectListSchemas",
+        "controler": "sql/selectByIdAndListSchemas",
+        "sql_query": "SELECT * FROM formations WHERE id_formation=?",
         "sql_list": [
-            "SELECT * FROM formateurs"
+            "SELECT id_formateur as idfk, nom, prenom, specialite, prix_jour FROM formateurs"
         ],
         "tables_list": [
             "formateurs"
         ],
-        "view": "Formations/formFormation",
+        "fkey": "id_formateur",
+        "liste_name" : "formateurs",
+        "type_form": "create",
+        "view": "Generic/formGeneric",
         "form_action": "/createFormation",
         "del_label": "Formation",
         "libelle": "Création",
@@ -275,12 +290,6 @@
         "sql_query": "SELECT * FROM communes",
         "view": "Communes/tabcommunes.hbs",
         "return_type": "application/json"
-    },
-    "GET/formations": {
-        "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM formations",
-        "view": "Formations/liste_formations",
-        "title": "Liste des formations"
     },
     "GET/formateurs": {
         "controler": "sql/selectSQL",
