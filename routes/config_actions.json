@@ -72,6 +72,38 @@
         "modelName": "Users",
         "view": "users"
     },
+    "GET/tab_countries": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM countries",
+        "view": "Countries/tabcountries.hbs"
+    },
+    "GET/json_Countries": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM countries",
+        "view": "Countries/tabcountries.hbs",
+        "return_type": "application/json"
+    },
+    "GET/countries": {
+        "controler": "sql/selectSQL",
+        "sql_query": "SELECT code as idfk, name_us, name_fr FROM countries",
+        "view": "Generic/listeGeneric",
+        "title_liste": "countries",
+        "id_btn": "btn_new",
+        "action_modify": "formCountries",
+        "action_create": "newCountries",
+        "title": "Liste des Pays"
+    },
+    "GET/tab_communes":{
+         "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM communes",
+        "view": "Communes/tabcommunes.hbs"
+    },
+    "GET/json_communes":{
+         "controler": "sql/selectSQL",
+        "sql_query": "SELECT * FROM communes",
+        "view": "Communes/tabcommunes.hbs",
+        "return_type": "application/json"
+    },
     "GET/users": {
         "controler": "sql/selectSQL",
         "sql_query": "SELECT * FROM users",
@@ -269,41 +301,28 @@
         "sql_query": "DELETE FROM formations WHERE id_formation=?",
         "redirect": "/formations"
     },
-    "GET/tab_countries": {
-        "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM countries",
-        "view": "Countries/tabcountries.hbs"
-    },
-    "GET/json_Countries": {
-        "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM countries",
-        "view": "Countries/tabcountries.hbs",
-        "return_type": "application/json"
-    },
-    "GET/tab_communes":{
-         "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM communes",
-        "view": "Communes/tabcommunes.hbs"
-    },
-    "GET/json_communes":{
-         "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM communes",
-        "view": "Communes/tabcommunes.hbs",
-        "return_type": "application/json"
-    },
     "GET/formateurs": {
         "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM formateurs",
-        "view": "Formateurs/liste_formateurs"
+        "sql_query": "SELECT id_formateur as idfk, nom, prenom, specialite, prix_jour FROM formateurs",
+        "view": "Generic/listeGeneric",
+        "title_liste": "formateurs",
+        "id_btn": "btn_new",
+        "action_modify": "formFormateur",
+        "action_create": "newFormateur",
+        "title": "Liste des formations"
     },
     "GET/newFormateur": {
-        "controler": "sql/selectListSchemas",
+        "controler": "sql/selectByIdAndListSchemas",
+        "sql_query": "SELECT * FROM formateurs WHERE id_formateur=?",
         "sql_list": [
-            "SELECT * FROM countries", "SELECT * FROM departements"
+            "SELECT id_formation as idfk, libelle, duree, plan_cours, prix, id_formateur FROM formations"
         ],
         "tables_list": [
-            "countries", "departements"
+            "formations"
         ],
+        "fkey": "id_formation",
+        "liste_name" : "formations",
+        "type_form": "create",
         "view": "Generic/formGeneric",
         "form_action": "/createFormateur",
         "title": "Create a new Formateur",

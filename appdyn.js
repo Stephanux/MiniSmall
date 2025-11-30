@@ -58,6 +58,20 @@ hbs.registerHelper('compare', function(lvalue, rvalue, options) {
         return options.inverse(this);
     }
 });
+hbs.registerHelper('starwith', function(lvalue, rvalue, options) {
+    //console.log("####### stratwith string from a long string  lvalue :", lvalue, " et rvalue: ", rvalue);
+    if (arguments.length < 3)
+        throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
+    var args = [].slice.call(arguments);
+    options = args.pop();
+    if (util.isString(str) && str.indexOf(prefix) === 0) {
+        return options.fn(this);
+    }
+    if (typeof options.inverse === 'function') {
+        return options.inverse(this);
+    }
+    return '';
+});
 if (global.config.mongodb.used == "True") {
     global.db = {};
     var mongoClient = require('mongodb').MongoClient;

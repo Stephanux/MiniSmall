@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* POST INSERT via Sequelize raw query . */
-router.post('/', function (req, res, next) {
+router.post('/:id', function (req, res, next) {
     if ((req.session.passport) && (req.session.passport.user != null)) {
         // ici on réalise une requête d'insertion dans une base SQL
         var params_name = req.message.params_query;

@@ -1,0 +1,31 @@
+<div class="center">
+<h1> Express App : {{title}}</h1>
+<div class="inputbox">
+    <select name="{{title_liste}}" id="{{title_liste}}">
+        {{#compare data null operator="=="}}
+            <option value="rien">Il n'y a pas de données dans la table {{title_liste}}</option>
+        {{else}}
+            <option value="0">Sélectionner : {{title_liste}}</option>
+        {{#each data}}
+            <option value="{{this.idfk}}">{{#each .}} {{this}}-{{/each}}</option>
+        {{/each}}
+        {{/compare}}
+    </select>
+</div>
+<h2>or</h2>
+<div class="inputbox">
+    <button id="{{id_btn}}">Créer {{title_liste}}</button>
+</div>
+</div>
+<script>
+    {{!-- Script de validation du formulaire de modification --}}
+    var usr = document.getElementById('{{title_liste}}');
+    usr.addEventListener('change', function (evt) {
+        window.location = "/{{action_modify}}/" + usr.value;
+    });
+    var btn_new = document.getElementById('{{id_btn}}');
+    btn_new.addEventListener('click', function (evt) {
+        window.location = "/{{action_create}}/" + Number(usr.value+1);
+    });
+</script>
+            
