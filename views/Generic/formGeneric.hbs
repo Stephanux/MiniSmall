@@ -5,15 +5,19 @@
             {{#each data}}
       
             {{!-- trouver le moyen de tester si clé externe pour afficher une lite déroulante--}}
-                {{#compare @key ../fkey operator="!="}}
-                      <div class="inputbox">
-                        {{#compare ../type_form "create" operator="==="}}
-                            <input type="text" name="{{@key}}" id="{{@key}}" value="" class="form-control" />
-                        {{else}}
-                            <input type="text" name="{{@key}}" id="{{@key}}" value="{{.}}" class="form-control" />
-                        {{/compare}}
-                        <span>{{@key}}</span>
-                    </div><br>
+                {{#compare @key ../fkey operator="!="}}  {{!--Est-ce que le nomm du champ (@key) est différent du paramètre fkey du config_actins.json --}}
+                        {{#startwith "id_" @key}}
+                            
+                        {{else}}    
+                             <div class="inputbox">
+                                {{#compare ../type_form "create" operator="==="}}
+                                    <input type="text" name="{{@key}}" id="{{@key}}" value="" class="form-control" />
+                                {{else}}
+                                    <input type="text" name="{{@key}}" id="{{@key}}" value="{{.}}" class="form-control" />
+                                {{/compare}}
+                                <span>{{@key}}</span>
+                            </div><br>
+                        {{/startwith}}
                 {{else}}   
                     <div class="inputbox">
                     <select name="{{../fkey}}" id="{{../fkey}}">

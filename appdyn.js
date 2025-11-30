@@ -26,6 +26,7 @@ fs.watch(filePath, "utf-8", function(event, trigger) {
 });
 
 var hbs = require('hbs');
+var util = require('handlebars-utils');
 hbs.registerPartials(__dirname + '/views/partials', function() {
     console.log('partials registered');
 });
@@ -58,10 +59,11 @@ hbs.registerHelper('compare', function(lvalue, rvalue, options) {
         return options.inverse(this);
     }
 });
-hbs.registerHelper('starwith', function(lvalue, rvalue, options) {
+
+hbs.registerHelper('startwith', function(prefix, str, options) {
     //console.log("####### stratwith string from a long string  lvalue :", lvalue, " et rvalue: ", rvalue);
     if (arguments.length < 3)
-        throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
+        throw new Error("Handlerbars Helper 'startwith' needs 2 parameters");
     var args = [].slice.call(arguments);
     options = args.pop();
     if (util.isString(str) && str.indexOf(prefix) === 0) {
