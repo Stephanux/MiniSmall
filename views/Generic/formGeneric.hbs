@@ -6,7 +6,7 @@
       
             {{!-- trouver le moyen de tester si clé externe pour afficher une lite déroulante--}}
                 {{#compare @key ../fkey operator="!="}}  {{!--Est-ce que le nomm du champ (@key) est différent du paramètre fkey du config_actins.json --}}
-                        {{#startwith "id_" @key}}
+                        {{#startwith "id_" @key}}  {{!--si le champ commence par 'id_' alors on ne l'affiche pas dans le ormulaire --}}
                             
                         {{else}}    
                              <div class="inputbox">
