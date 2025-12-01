@@ -95,7 +95,7 @@
     },
     "GET/tab_communes":{
          "controler": "sql/selectSQL",
-        "sql_query": "SELECT * FROM communes",
+        "sql_query": "SELECT Code_commune_INSEE, Nom_de_la_commune, Code_postal FROM communes",
         "view": "Communes/tabcommunes.hbs"
     },
     "GET/json_communes":{
@@ -300,6 +300,13 @@
         "controler": "sql/deleteSQLById",
         "sql_query": "DELETE FROM formations WHERE id_formation=?",
         "redirect": "/formations"
+    },
+    "GET/json_formations": {
+         "controler": "sql/selectSQL",
+        "sql_query": "SELECT id_formation as idfk, libelle, duree, plan_cours, prix, id_formateur FROM formations",
+        "view": "Generic/listeGeneric",
+        "title_liste": "formations",
+        "return_type": "application/json"
     },
     "GET/formateurs": {
         "controler": "sql/selectSQL",

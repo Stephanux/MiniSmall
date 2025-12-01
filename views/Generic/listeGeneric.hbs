@@ -25,7 +25,7 @@
     });
     var btn_new = document.getElementById('{{id_btn}}');
     btn_new.addEventListener('click', function (evt) {
-        window.location = "/{{action_create}}/" + Number(usr.value+1);
+        window.location = "/{{action_create}}/" + Number(usr[1].value);
     });
 </script>
             
