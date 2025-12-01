@@ -6,9 +6,9 @@
             <option value="rien">Il n'y a pas de données dans la table {{title_liste}}</option>
         {{else}}
             <option value="0">Sélectionner : {{title_liste}}</option>
-        {{#each data}}
-            <option value="{{this.idfk}}">{{#each .}} {{this}}-{{/each}}</option>
-        {{/each}}
+            {{#each data}}
+                <option value="{{this.idfk}}">{{#each .}} {{this}}-{{/each}}</option>
+            {{/each}}
         {{/compare}}
     </select>
 </div>
@@ -25,7 +25,7 @@
     });
     var btn_new = document.getElementById('{{id_btn}}');
     btn_new.addEventListener('click', function (evt) {
-        window.location = "/{{action_create}}/" + Number(usr[1].value);
+        window.location = "/{{action_create}}/" + usr[1].value;
     });
 </script>
             

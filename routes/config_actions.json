@@ -238,7 +238,7 @@
     },
     "GET/formFormation": {
        "controler": "sql/selectByIdAndListSchemas",
-        "sql_query": "SELECT * FROM formations WHERE id_formation=?",
+        "sql_query": "SELECT id_formation, libelle, duree, plan_cours, prix, id_formateur FROM formations WHERE id_formation=?",
         "sql_list": [
             "SELECT id_formateur as idfk, nom, prenom, specialite, prix_jour FROM formateurs"
         ],
