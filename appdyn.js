@@ -38,15 +38,15 @@ hbs.registerHelper('compare', function(lvalue, rvalue, options) {
     var operator = options.hash.operator || "==";
     var operators = {
         '==': function(l, r) {
-            console.log("debug compare : "+l+" =="+r, l==r );
+            console.log("debug compare : "+l+" == "+r, l==r );
             return l == r;
         },
         '===': function(l, r) {
-            console.log("debug compare :  "+l+"==="+r, l===r );
+            console.log("debug compare :  "+l+" === "+r, l===r );
             return l === r;
         },
         '!=': function(l,r) {
-            console.log("debug compare :  "+l+"!="+r, l!=r );
+            console.log("debug compare :  "+l+" != "+r, l!=r );
             return l != r;
         }
     }
