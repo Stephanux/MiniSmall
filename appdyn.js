@@ -18,6 +18,7 @@ global.config = JSON.parse(fs.readFileSync("./config_minismall.json", "utf8"));
 
 /*chargement de la configuration JSON des actions et watchdog sur le fichier pour rechargement à chaud */
 global.actions_json = JSON.parse(fs.readFileSync("./routes/config_actions.json", "utf8"));
+console.log("File config_actions.json loaded !");
 var filePath = "./routes/config_actions.json";
 fs.watch(filePath, "utf-8", function(event, trigger) {
     console.log("-- The file config_actons.json has changed ! --");
