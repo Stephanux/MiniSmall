@@ -32,8 +32,8 @@ router.get('/', function(req, res, next) {
             if (req.message.return_type == null) {
                 // récupérer les données extraites de la base et les envoyées à une vue
                 params_render = {};
-                for (param in global.actions_json[req.message.action]) {
-                    params_render[param] = (global.actions_json[req.message.action])[param];
+                for (param in global.actions_sql_json[req.message.action]) {
+                    params_render[param] = (global.actions_sql_json[req.message.action])[param];
                 }
                 params_render["datas"] = results;
                 params_render["data"] = results[req.message.sql_list[i]];

@@ -13,8 +13,8 @@ router.get('/', function(req, res, next) {
                 if (req.message.return_type == null) {
                     // récupérer les données extraites de la base et les envoyées à une vue
                     params_render = {};
-                    for (param in global.actions_json[req.message.action]) {
-                        params_render[param] = (global.actions_json[req.message.action])[param];
+                    for (param in global.actions_sql_json[req.message.action]) {
+                        params_render[param] = (global.actions_sql_json[req.message.action])[param];
                     }
                     params_render["data"] = result;
                     params_render["stitle"] = "Connexion à BD SQL données Countries via Sequelize";
@@ -47,8 +47,8 @@ router.route('/:id').get(function(req, res, next) {
                 if (req.message.return_type == null) {
                     // récupérer les données extraites de la base et les envoyées à une vue
                     params_render = {};
-                    for (param in global.actions_json[req.message.action]) {
-                        params_render[param] = (global.actions_json[req.message.action])[param];
+                    for (param in global.actions_sql_json[req.message.action]) {
+                        params_render[param] = (global.actions_sql_json[req.message.action])[param];
                     }
                     params_render["data"] = result[0];
                     params_render["stitle"] = "Connexion à BD SQL données Countries via Sequelize";
@@ -81,8 +81,8 @@ router.route('/:debut/:fin').get(function(req, res, next) {
                 if (req.message.return_type == null) {
                     // récupérer les données extraites de la base et les envoyées à une vue
                     params_render = {};
-                    for (param in global.actions_json[req.message.action]) {
-                        params_render[param] = (global.actions_json[req.message.action])[param];
+                    for (param in global.actions_sql_json[req.message.action]) {
+                        params_render[param] = (global.actions_sql_json[req.message.action])[param];
                     }
                     params_render["data"] = result[0];
                     params_render["stitle"] = "Connexion à BD SQL données Countries via Sequelize";

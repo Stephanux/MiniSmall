@@ -35,28 +35,15 @@ router.get(('/:id'), function(req, res) {
                 getDataFromTable(i, function() {
                     if (req.message.return_type == null) {
                         // récupérer les données extraites de la base et les envoyées à une vue
-                        console.log("rendering with ",{
-                            stitle: 'Connexion à BD SQL données Countries via Sequelize',
-                            title: req.message.title,
-                            libelle: req.message.libelle,
-                            del_label: req.message.del_label,
-                            form_action: req.message.form_action,
-                            fkey: req.message.fkey,
-                            type_form: req.message.type_form,
-                            datas: results, // Attention a renvoyer une variable avec un nom generique
-                            data: result[0]
-                        })
-                        res.render(req.message.view, {
-                            stitle: 'Connexion à BD SQL données Countries via Sequelize',
-                            title: req.message.title,
-                            libelle: req.message.libelle,
-                            del_label: req.message.del_label,
-                            form_action: req.message.form_action,
-                            fkey: req.message.fkey,
-                            type_form: req.message.type_form,
-                            datas: results, // Attention a renvoyer une variable avec un nom generique
-                            data: result[0]
-                        });
+                        params_render = {};
+                        for (param in global.actions_sql_json[req.message.action]) {
+                            params_render[param] = (global.actions_sql_json[req.message.action])[param];
+                        }
+                        params_render["datas"] = results;
+                        params_render["data"] = result[0];
+                        params_render["msg"] = req.query.msg;
+                        console.log("params_render:", params_render);
+                        res.render(req.message.view, params_render);
                     } else {
                         res.setHeader('content-type', 'application/json');
                         res.send(result);

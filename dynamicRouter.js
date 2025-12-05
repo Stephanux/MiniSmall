@@ -33,8 +33,8 @@ function manageAction(req, res, next) {
     /** AJOUT DE L'ENSEMBLE DES PARAMETRES DU FICHIERS "CONFIG_ACTIONS.JSON" DANS LE MESSAGE ASSOCIE A REQ */
     /***************************************************************************************************** */
     /* Boucle de récupération des paramètres de l'action du fichier config_actions.json */
-    for (param in global.actions_json[req.message.action]) {
-        req.message[param] = (global.actions_json[req.message.action])[param];
+    for (param in global.actions_sql_json[req.message.action]) {
+        req.message[param] = (global.actions_sql_json[req.message.action])[param];
     }
     console.log('req.message dans dynamicRouteur : ', req.message);
 
@@ -46,8 +46,8 @@ function manageAction(req, res, next) {
     // l'objet "req.message" dans les contrôleurs (routes/).
 
     // Si l'action n'est pas définie dans l'annuaire, on log l'erreur
-    if (typeof global.actions_json[req.message.action] == 'undefined') {
-        console.log("Erreur: Pas d'action dans l'annuaire config_actions.json : " + path);
+    if (typeof global.actions_sql_json[req.message.action] == 'undefined') {
+        console.log("Erreur: Pas d'action dans l'annuaire config_actions_sql.json : " + path);
         next();
     } else {
         instanceModule = require('./routes/' + req.message.controler);

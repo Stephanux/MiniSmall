@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET data listing. */
+/* Route utilisant l'id passé dans la requête HTTP GET via req.query.id */
 router.get('/', function(req, res, next) {
     if ((req.session.passport) && (req.session.passport.user != null)) {
         var params_value = [];
@@ -16,8 +16,8 @@ router.get('/', function(req, res, next) {
                 if (req.message.return_type == null) {
                     // récupérer les données extraites de la base et les envoyées à une vue
                     params_render = {};
-                    for (param in global.actions_json[req.message.action]) {
-                        params_render[param] = (global.actions_json[req.message.action])[param];
+                    for (param in global.actions_sql_json[req.message.action]) {
+                        params_render[param] = (global.actions_sql_json[req.message.action])[param];
                     }
                     params_render["data"] = result[0];
                     params_render["stitle"] = "Connexion à BD SQL données via Sequelize";
@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
         res.redirect('/'); // affichage boîte de login si pas authentifié
     }
 });
-
+/* Route utilisant l'id passé dans l'URL de la requête HTTP GET via req.params.id */
 router.get('/:id', function(req, res, next) {
     if ((req.session.passport) && (req.session.passport.user != null)) {
         var params_value = [];
@@ -50,8 +50,8 @@ router.get('/:id', function(req, res, next) {
                 if (req.message.return_type == null) {
                     // récupérer les données extraites de la base et les envoyées à une vue
                     params_render = {};
-                    for (param in global.actions_json[req.message.action]) {
-                        params_render[param] = (global.actions_json[req.message.action])[param];
+                    for (param in global.actions_sql_json[req.message.action]) {
+                        params_render[param] = (global.actions_sql_json[req.message.action])[param];
                     }
                     params_render["data"] = result[0];
                     params_render["stitle"] = "Connexion à BD SQL données via Sequelize";
@@ -69,6 +69,7 @@ router.get('/:id', function(req, res, next) {
     }
 });
 
+/* Route utilisant l'id passé dans la requête HTTP POST via req.body.id */
 router.post('/', function(req, res, next) {
     if ((req.session.passport) && (req.session.passport.user != null)) {
         var params_value = [];
@@ -83,8 +84,8 @@ router.post('/', function(req, res, next) {
                 if (req.message.return_type == null) {
                     // récupérer les données extraites de la base et les envoyées à une vue
                     params_render = {};
-                    for (param in global.actions_json[req.message.action]) {
-                        params_render[param] = (global.actions_json[req.message.action])[param];
+                    for (param in global.actions_sql_json[req.message.action]) {
+                        params_render[param] = (global.actions_sql_json[req.message.action])[param];
                     }
                     params_render["data"] = result[0];
                     params_render["stitle"] = "Connexion à BD SQL données via Sequelize";

@@ -7,7 +7,7 @@
         {{else}}
             <option value="0">Sélectionner : {{title_liste}}</option>
             {{#each data}}
-                <option value="{{this.idfk}}">{{#each .}} {{this}}-{{/each}}</option>
+                <option value="{{this.id}}">{{#each .}} {{this}}-{{/each}}</option>
             {{/each}}
         {{/compare}}
     </select>

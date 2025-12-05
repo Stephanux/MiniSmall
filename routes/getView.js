@@ -5,8 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     console.log("from getView ");
     params_render = {};
-    for (param in global.actions_json[req.message.action]) {
-        params_render[param] = (global.actions_json[req.message.action])[param];
+    for (param in global.actions_sql_json[req.message.action]) {
+        params_render[param] = (global.actions_sql_json[req.message.action])[param];
     }
     console.log("params_render :", params_render);
     res.render(req.message.view, params_render);
