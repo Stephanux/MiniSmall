@@ -181,13 +181,14 @@
     },
     "GET/formFormation": {
        "controler": "sql/selectByIdAndListSchemas",
-        "sql_query": "SELECT id_formation, libelle, duree, plan_cours, prix, id_formateur FROM formations WHERE id_formation=?",
+        "sql_query": "SELECT id_formation as id, libelle, duree, plan_cours, prix, id_formateur as fkid FROM formations WHERE id_formation=?",
         "sql_list": [
             "SELECT id_formateur as idfk, nom, prenom, specialite, prix_jour FROM formateurs"
         ],
         "tables_list": [
             "formateurs"
         ],
+        "alias_fkey": "fkid",
         "fkey": "id_formateur",
         "liste_name" : "formateurs",
         "type_form": "modify",

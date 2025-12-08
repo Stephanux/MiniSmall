@@ -1,0 +1,70 @@
+<fieldset>
+  {{#each datas}}  
+   <legend>Choisir vôtre {{@key}} :</legend>
+    {{#each this}}  {{!-- C'est un array contenant des objets à ce niveau --}}
+      {{!-- utilisation de each sur les objets (ici .) contenu dans le tableau --}}
+        <div>
+          {{#compare ../../data.fkid this.idfk operator='=='}} 
+            <input type="checkbox" value="{{this.idfk}}" id="{{this.idfk}}" name="{{../../fkey}}" checked=""/>
+          {{else}}
+            <input type="checkbox" value="{{this.idfk}}" id="{{this.idfk}}" name="{{../../fkey}}" />
+          {{/compare}}
+          <label for="scales">{{#each .}} {{.}}-{{/each}}</label>
+        </div>  
+    {{/each}}
+  {{/each}}
+</fieldset>
+
+{{!-- params_render : données en sortie du contrôleur
+{
+   "controler":"sql/selectByIdAndListSchemas",
+   "sql_query":"SELECT id_formation as id, libelle, duree, plan_cours, prix, id_formateur as fkid FROM formations WHERE id_formation=?",
+   "sql_list":[
+      "SELECT id_formateur as idfk, nom, prenom, specialite, prix_jour FROM formateurs"
+   ],
+   "tables_list":[
+      "formateurs"
+   ],
+   "fkey":"fkid",
+   "liste_name":"formateurs",
+   "type_form":"modify",
+   "view":"Generic/formGeneric",
+   "form_action":"/modifyFormation",
+   "del_label":"Formations",
+   "libelle":"Formation",
+   "title":"Modifier une formation de l'application :",
+   "datas":{
+      "formateurs":[
+         {
+            "idfk":1,
+            "nom":"stéphane",
+            "prenom":"MASCARON",
+            "specialite":"Java, JavaScript, RUST",
+            "prix_jour":800
+         },
+         {
+            "idfk":2,
+            "nom":"Shidoush",
+            "prenom":"SIAMI",
+            "specialite":"Electronique",
+            "prix_jour":700
+         },
+         {
+            "idfk":3,
+            "nom":"Tétounet",
+            "prenom":"Steph",
+            "specialite":"delphi",
+            "prix_jour":400
+         }
+      ]
+   },
+   "data":{
+      "id":1,
+      "libelle":"Rust",
+      "duree":"5",
+      "plan_cours":"difficile",
+      "prix":1500,
+      "fkid":3
+   }
+}
+--}}

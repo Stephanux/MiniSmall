@@ -1,0 +1,12 @@
+<select name="{{fkey}}" id="{{fkey}}">
+    {{#each data}}  {{!-- trouver comment accéder à datas depuis ici --}}
+        {{#each this}}  {{!-- C'est un array contenant des objets à ce niveau --}}
+            {{!-- utilisation de each sur les objets (ici .) contenu dans le tableau --}}
+            {{#compare ../../fkid this.idfk operator='=='}}   {{!-- problème pour tester égalité entre id_formateur de formations et id_formateur de formateurs --}}
+                <option value="{{this.idfk}}" selected>{{#each .}} {{this}}-{{/each}}</option>
+            {{else}}
+                <option value="{{this.idfk}}">{{#each .}} {{this}}-{{/each}}</option> 
+            {{/compare}}   
+        {{/each}}
+    {{/each}}
+</select>

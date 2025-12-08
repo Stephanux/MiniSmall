@@ -2,11 +2,10 @@
     <h1> Express App : {{title}}</h1>
     <div class="container">
         <form method="POST" action="{{form_action}}" id="formAdd">
-            {{#each data}}
-      
+            {{#each data}}     
                 {{!-- trouver le moyen de tester si clé externe pour afficher une lite déroulante variable fkey dans annuaire acitons--}}
-                {{#compare @key ../fkey operator="!="}}  {{!--Est-ce que le nomm du champ (@key) est différent du paramètre fkey du config_actions.json --}}
-                        {{#startwith "id_" @key}}  {{!--si le champ commence par 'id_' alors on ne l'affiche pas dans le formulaire --}}
+                {{#compare @key ../alias_fkey operator="!="}}  {{!--Est-ce que le nomm du champ (@key) est différent du paramètre fkey du config_actions.json --}}
+                        {{#startwith "id" @key}}  {{!--si le champ commence par 'id_' alors on ne l'affiche pas dans le formulaire --}}
                             
                         {{else}}    
                              <div class="inputbox">
@@ -20,22 +19,12 @@
                         {{/startwith}}
                 {{else}}   
                     <div class="inputbox">
-                    <select name="{{../fkey}}" id="{{../fkey}}">
-                    {{#each ../datas}}  
-                        {{#each this}}  {{!-- C'est un array contenant des objets à ce niveau --}}
-                            {{!-- utilisation de each sur les objets (ici .) contenu dans le tableau --}}
-                            {{#compare ../../. this.idfk operator='=='}}   {{!-- problème pour tester égalité entre id_formateur de formations et id_formateur de formateurs --}}
-                                <option value="{{this.idfk}}" selected>{{#each .}} {{this}}-{{/each}}</option>
-                            {{else}}
-                                <option value="{{this.idfk}}">{{#each .}} {{this}}-{{/each}}</option> 
-                            {{/compare}}   
-                        {{/each}}
-                    {{/each}}
-                    </select>
-                    <span>{{@key}}</span> 
-                </div>
+                        {{!--{{> components/comboboxGeneric}} Trouver comment accéder à "datas" depuis le component combobox--}}
+                        {{> components/comboboxGeneric data=../datas fkey=../fkey fkid=.}}
+                    </div>
                 {{/compare}}
             {{/each}}
+            {{> components/checkboxGeneric}}
             <table class="center">
                 <tr>
                     <td>
