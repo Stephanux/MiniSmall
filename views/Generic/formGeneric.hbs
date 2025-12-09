@@ -19,12 +19,13 @@
                         {{/startwith}}
                 {{else}}   
                     <div class="inputbox">
-                        {{!--{{> components/comboboxGeneric}} Trouver comment accéder à "datas" depuis le component combobox--}}
+                        {{!--{{> components/comboboxGeneric}} on utilise des attributs pour accéder à "datas" depuis le component combobox--}}
                         {{> components/comboboxGeneric data=../datas fkey=../fkey fkid=.}}
                     </div>
                 {{/compare}}
             {{/each}}
-            {{> components/checkboxGeneric}}
+            {{!-- Intégration du composant liste de sélection case à cocher générique : checkboxGeneric --}}
+            {{!--> components/checkboxGeneric--}}  {{!-- Mise en commentaire du composant checkboxGeneric --}}
             <table class="center">
                 <tr>
                     <td>
@@ -54,6 +55,6 @@
     });
     var btn_del = document.getElementById('delbtn');
     btn_del.addEventListener('click', function (evt) {
-        window.location = "/deleteFormation/"+document.URL.split('/')[4];
+        window.location = "/{{btn_del_action}}/"+document.URL.split('/')[4];
     });
 </script>

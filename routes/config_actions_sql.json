@@ -194,19 +194,21 @@
         "type_form": "modify",
         "view": "Generic/formGeneric",
         "form_action": "/modifyFormation",
+        "btn_del_action":"deleteFormation",
         "del_label": "Formations",
         "libelle": "Formation",
         "title": "Modifier une formation de l'application :"
     },
     "GET/newFormation": {
         "controler": "sql/selectByIdAndListSchemas",
-        "sql_query": "SELECT * FROM formations WHERE id_formation=?",
+        "sql_query": "SELECT id_formation as id, libelle, duree, plan_cours, prix, id_formateur as fkid FROM formations WHERE id_formation=?",
         "sql_list": [
             "SELECT id_formateur as idfk, nom, prenom, specialite, prix_jour FROM formateurs"
         ],
         "tables_list": [
             "formateurs"
         ],
+        "alias_fkey": "fkid",
         "fkey": "id_formateur",
         "liste_name" : "formateurs",
         "type_form": "create",
@@ -298,6 +300,7 @@
         "label_id": "id_formateur",
         "sql_query": "SELECT * FROM formateurs WHERE id_formateur=?",
         "form_action": "/modifyFormateur",
+        "btn_del_action":"deleteFormateur",
         "title": "Modification formateur",
         "libelle": "Modification",
         "del_label": "ce Formateur"
