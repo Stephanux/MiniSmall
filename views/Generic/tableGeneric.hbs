@@ -2,7 +2,7 @@
   <table id="example" class="display" style="width:100%">
   <thead>
     <tr> 
-         {{#each tab_columns}}
+         {{#each tab_columns}}  {{!-- tab_columns paramètre à ajouter dans l'action du config_actions.json pour affichage des titres des colonnes--}}
             <th>{{@key}}</th>
          {{/each}}
     </tr>
