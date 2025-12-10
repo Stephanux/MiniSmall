@@ -19,8 +19,12 @@
                         {{/startwith}}
                 {{else}}   
                     <div class="inputbox">
-                        {{!--{{> components/comboboxGeneric}} on utilise des attributs pour accéder à "datas" depuis le component combobox--}}
-                        {{> components/comboboxGeneric data=../datas fkey=../fkey fkid=.}}
+                        {{#compare ../type_form "create" operator="==="}}  {{!--si l'action du form commence par 'create' alors on affiche datalistGeneric sinon comboboxGeneric --}}
+                            {{> components/datalistGeneric data=../datas fkey=../fkey fkid=.}}
+                        {{else}}    
+                            {{> components/comboboxGeneric data=../datas fkey=../fkey fkid=.}} 
+                        {{/compare}}
+                        <span>{{../liste_name}}</span>
                     </div>
                 {{/compare}}
             {{/each}}
